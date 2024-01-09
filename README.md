@@ -11,4 +11,3 @@
 - İlk olarak MongoDB Local kurulum
 - MongoDB Compass ile veritabanı oluşturma
 - Node JS kurulumu (ardından npm-install komutu kullanılacaktır proje içinde)
-- 
