@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{league.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{league.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/leagues/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{league.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${leagues.empty}">[[#{league.list.empty}]]</div>
+            <div th:if="${!leagues.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{league.id.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{league.leagueName.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{league.countryLeague.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="league : ${leagues}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${league.id}]]</td>
+                            <td class="p-2">[[${league.leagueName}]]</td>
+                            <td class="p-2">[[${league.countryLeague}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/leagues/edit/{id}(id=${league.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{league.list.edit}]]</a>
+                                    <form th:action="@{/leagues/delete/{id}(id=${league.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{league.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
