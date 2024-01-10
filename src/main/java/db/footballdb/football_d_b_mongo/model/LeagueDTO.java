@@ -18,4 +18,6 @@ public class LeagueDTO {
 
     private Long countryLeague;
 
+    private String ligHangiUlkede;
+
 }

@@ -82,7 +82,7 @@ public class PlayersController {
             return "players/edit";
         }
         playersService.update(id, playersDTO);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("players.update.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("players.update.success"));
         return "redirect:/playerss";
     }
 
@@ -90,7 +90,7 @@ public class PlayersController {
     public String delete(@PathVariable(name = "id") final Long id,
             final RedirectAttributes redirectAttributes) {
         playersService.delete(id);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("players.delete.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("players.delete.success"));
         return "redirect:/playerss";
     }
 

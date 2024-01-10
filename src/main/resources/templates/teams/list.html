@@ -19,7 +19,6 @@
                         <tr>
                             <th scope="col" class="text-left p-2">[[#{teams.id.label}]]</th>
                             <th scope="col" class="text-left p-2">[[#{teams.tName.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.tCountry.label}]]</th>
                             <th scope="col" class="text-left p-2">[[#{teams.tLeague.label}]]</th>
                             <th scope="col" class="text-left p-2">[[#{teams.tPoint.label}]]</th>
                             <th scope="col" class="text-left p-2">[[#{teams.tValue.label}]]</th>
@@ -31,10 +30,9 @@
                         <tr th:each="teams : ${teamses}" class="odd:bg-gray-100">
                             <td class="p-2">[[${teams.id}]]</td>
                             <td class="p-2">[[${teams.tName}]]</td>
-                            <td class="p-2">[[${teams.tCountry}]]</td>
                             <td class="p-2">[[${teams.tLeague}]]</td>
                             <td class="p-2">[[${teams.tPoint}]]</td>
-                            <td class="p-2">[[${teams.tValue}]]</td>
+                            <td class="p-2">[['€'+${teams.tValue}]]</td>
                             <td class="p-2">[[${teams.takimHangiUlkede}]]</td>
                             <td
                             <td class="p-2">

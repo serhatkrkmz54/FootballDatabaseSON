@@ -28,7 +28,7 @@
                         <tr th:each="country : ${countries}" class="odd:bg-gray-100">
                             <td class="p-2">[[${country.id}]]</td>
                             <td class="p-2">[[${country.cName}]]</td>
-                            <td class="p-2">[[${country.cValue}]]</td>
+                            <td class="p-2">[['€'+${country.cValue}]]</td>
                             <td class="p-2">[[${country.cPoint}]]</td>
                             <td class="p-2">
                                 <div class="float-right whitespace-nowrap">

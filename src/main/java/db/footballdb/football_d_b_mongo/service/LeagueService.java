@@ -67,6 +67,7 @@ public class LeagueService {
         leagueDTO.setId(league.getId());
         leagueDTO.setLeagueName(league.getLeagueName());
         leagueDTO.setCountryLeague(league.getCountryLeague() == null ? null : league.getCountryLeague().getId());
+        leagueDTO.setLigHangiUlkede(league.getCountryLeague() == null ? null : league.getCountryLeague().getCName());
         return leagueDTO;
     }
 

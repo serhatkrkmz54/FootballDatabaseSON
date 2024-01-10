@@ -12,45 +12,92 @@
                     <a th:href="@{/playerss/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{players.list.createNew}]]</a>
                 </div>
             </div>
-            <div th:if="${playerses.empty}">[[#{players.list.empty}]]</div>
-            <div th:if="${!playerses.empty}" class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-left p-2">[[#{players.id.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pName.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pSurname.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pPlayerAge.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pCountry.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pWeight.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pHeight.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.pPosition.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{players.toTeams.label}]]</th>
-                            <th><!-- --></th>
-                        </tr>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.id.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pName.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pSurname.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pPlayerAge.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pValue.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pCountry.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pWeight.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pHeight.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.pPosition.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            [[#{players.toTeams.label}]]
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            DÜZENLE
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            KALDIR
+                        </th>
+                    </tr>
                     </thead>
-                    <tbody class="border-t-2 border-black">
-                        <tr th:each="players : ${playerses}" class="odd:bg-gray-100">
-                            <td class="p-2">[[${players.id}]]</td>
-                            <td class="p-2">[[${players.pName}]]</td>
-                            <td class="p-2">[[${players.pSurname}]]</td>
-                            <td class="p-2">[[${players.pPlayerAge}]]</td>
-                            <td class="p-2">[[${players.pCountry}]]</td>
-                            <td class="p-2">[[${players.pWeight}]]</td>
-                            <td class="p-2">[[${players.pHeight}]]</td>
-                            <td class="p-2">[[${players.pPosition}]]</td>
-                            <td class="p-2">[[${players.oyuncuHangiTakimda}]]</td>
-
-                            <td class="p-2">
-                                <div class="float-right whitespace-nowrap">
-                                    <a th:href="@{/playerss/edit/{id}(id=${players.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{players.list.edit}]]</a>
-                                    <form th:action="@{/playerss/delete/{id}(id=${players.id})}"
-                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
-                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{players.list.delete}]]</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody>
+                    <div th:if="${playerses.empty}">[[#{players.list.empty}]]</div>
+                    <div th:if="${!playerses.empty}" class="overflow-x-auto">
+                    <tr th:each="players : ${playerses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                            [[${players.id}]]
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            [[${players.pName}]]
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            [[${players.pSurname}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.pPlayerAge}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [['€'+${players.pValue}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.pCountry}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.pWeight}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.pHeight}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.pPosition}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            [[${players.oyuncuHangiTakimda}]]
+                        </td>
+                        <td class="px-6 py-4">
+                            <a th:href="@{/playerss/edit/{id}(id=${players.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">[[#{players.list.edit}]]</a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <form th:action="@{/playerss/delete/{id}(id=${players.id})}"
+                                  th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
+                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">[[#{players.list.delete}]]</button>
+                            </form>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

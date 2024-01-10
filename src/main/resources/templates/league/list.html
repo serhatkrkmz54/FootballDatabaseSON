@@ -27,7 +27,7 @@
                         <tr th:each="league : ${leagues}" class="odd:bg-gray-100">
                             <td class="p-2">[[${league.id}]]</td>
                             <td class="p-2">[[${league.leagueName}]]</td>
-                            <td class="p-2">[[${league.countryLeague}]]</td>
+                            <td class="p-2">[[${league.ligHangiUlkede}]]</td>
                             <td class="p-2">
                                 <div class="float-right whitespace-nowrap">
                                     <a th:href="@{/leagues/edit/{id}(id=${league.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{league.list.edit}]]</a>
