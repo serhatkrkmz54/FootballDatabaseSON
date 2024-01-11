@@ -1,5 +1,6 @@
 module.exports = {
-  content: ["./src/main/resources/**/*.{html,js}"],
+  content: ["./src/main/resources/**/*.{html,js}",
+    "./node_modules/flowbite/**/*.js"],
   safelist: [
     'underline'
   ],
@@ -10,6 +11,7 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    require('flowbite/plugin'),
   ]
 }
