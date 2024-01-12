@@ -22,7 +22,7 @@ public class TeamsDTO {
     @JsonProperty("tName")
     private String tName;
 
-    @NotNull
+    /*@NotNull
     @Size(max = 255)
     @JsonProperty("tCountry")
     private String tCountry;
@@ -30,7 +30,7 @@ public class TeamsDTO {
     @NotNull
     @Size(max = 255)
     @JsonProperty("tLeague")
-    private String tLeague;
+    private String tLeague;*/
 
     @NotNull
     @JsonProperty("tPoint")
@@ -46,7 +46,7 @@ public class TeamsDTO {
 
     private String takimHangiUlkede;
 
-    private List<Long> leaguesss;
+    private Long leaguesss;
 
     private List<String> ulkedekiLigler;
 

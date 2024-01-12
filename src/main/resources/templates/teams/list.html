@@ -1,53 +1,76 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}">
-    <head>
-        <title>[[#{teams.list.headline}]]</title>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <div class="flex flex-wrap mb-6">
-                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{teams.list.headline}]]</h1>
-                <div>
-                    <a th:href="@{/teamss/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{teams.list.createNew}]]</a>
-                </div>
-            </div>
+      layout:decorate="~{layout}">
+<head>
+    <title>[[#{teams.list.headline}]]</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="flex flex-wrap mb-6">
+        <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{teams.list.headline}]]</h1>
+        <div>
+            <a th:href="@{/teamss/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{teams.list.createNew}]]</a>
+        </div>
+    </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.id.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tName.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tPoint.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tValue.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.toCountry.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DÜZENLE
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    KALDIR
+                </th>
+            </tr>
+            </thead>
+            <tbody>
             <div th:if="${teamses.empty}">[[#{teams.list.empty}]]</div>
             <div th:if="${!teamses.empty}" class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-left p-2">[[#{teams.id.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.tName.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.tLeague.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.tPoint.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.tValue.label}]]</th>
-                            <th scope="col" class="text-left p-2">[[#{teams.toCountry.label}]]</th>
-                            <th><!-- --></th>
-                        </tr>
-                    </thead>
-                    <tbody class="border-t-2 border-black">
-                        <tr th:each="teams : ${teamses}" class="odd:bg-gray-100">
-                            <td class="p-2">[[${teams.id}]]</td>
-                            <td class="p-2">[[${teams.tName}]]</td>
-                            <td class="p-2">[[${teams.tLeague}]]</td>
-                            <td class="p-2">[[${teams.tPoint}]]</td>
-                            <td class="p-2">[['€'+${teams.tValue}]]</td>
-                            <td class="p-2">[[${teams.takimHangiUlkede}]]</td>
-                            <td
-                            <td class="p-2">
-                                <div class="float-right whitespace-nowrap">
-                                    <a th:href="@{/teamss/edit/{id}(id=${teams.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{teams.list.edit}]]</a>
-                                    <form th:action="@{/teamss/delete/{id}(id=${teams.id})}"
-                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
-                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{teams.list.delete}]]</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </body>
+                <tr th:each="teams : ${teamses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                        [[${teams.id}]]
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        [[${teams.tName}]]
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        [[${teams.tPoint}]]
+                    </td>
+                    <td class="px-6 py-4">
+                        [['€'+${teams.tValue}]]
+                    </td>
+                    <td class="px-6 py-4">
+                        [[${teams.takimHangiUlkede}]]
+                    </td>
+                    <td class="px-6 py-4">
+                        <a th:href="@{/teamss/edit/{id}(id=${teams.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">[[#{teams.list.edit}]]</a>
+                    </td>
+                    <td class="px-6 py-4">
+                        <form th:action="@{/teamss/delete/{id}(id=${teams.id})}"
+                              th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
+                            <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">[[#{teams.list.delete}]]</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
 </html>

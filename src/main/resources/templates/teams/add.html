@@ -15,12 +15,12 @@
             <div th:replace="~{fragments/forms::globalErrors('teams')}" />
             <form th:action="${requestUri}" method="post">
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tName')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tCountry')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tLeague')}" />
+<!--                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tCountry')}" />-->
+                <!--<div th:replace="~{fragments/forms::inputRow(object='teams', field='tLeague')}" />-->
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tValue')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toCountry', type='select')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='teams', field='leaguesss', type='multiselect')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='teams', field='leaguesss', type='select')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toTeamstoCompetitions', type='multiselect')}" />
                 <input type="submit" th:value="#{teams.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
             </form>

@@ -31,13 +31,13 @@ public class Teams {
     @Size(max = 255)
     private String tName;
 
-    @NotNull
+    /*@NotNull
     @Size(max = 255)
     private String tCountry;
 
     @NotNull
     @Size(max = 255)
-    private String tLeague;
+    private String tLeague;*/
 
     @NotNull
     private Integer tPoint;
@@ -57,7 +57,7 @@ public class Teams {
     private Country toCountry;
 
     @DocumentReference(lazy = true)
-    private Set<League> leaguesss;
+    private League leaguesss;
 
     @DocumentReference(lazy = true)
     private Set<Competitions> toTeamstoCompetitions;

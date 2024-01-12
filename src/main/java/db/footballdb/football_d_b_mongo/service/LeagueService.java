@@ -59,7 +59,7 @@ public class LeagueService {
                 .orElseThrow(NotFoundException::new);
         // remove many-to-many relations at owning side
         teamsRepository.findAllByLeaguesss(league)
-                .forEach(teams -> teams.getLeaguesss().remove(league));
+                .forEach(teams -> teams.setLeaguesss(null));
         leagueRepository.delete(league);
     }
 

@@ -74,18 +74,16 @@ public class TeamsService {
     private TeamsDTO mapToDTO(final Teams teams, final TeamsDTO teamsDTO) {
         teamsDTO.setId(teams.getId());
         teamsDTO.setTName(teams.getTName());
-        teamsDTO.setTCountry(teams.getTCountry());
-        teamsDTO.setTLeague(teams.getTLeague());
+        //teamsDTO.setTCountry(teams.getTCountry());
+        //teamsDTO.setTLeague(teams.getTLeague());
         teamsDTO.setTPoint(teams.getTPoint());
         teamsDTO.setTValue(teams.getTValue());
         teamsDTO.setToCountry(teams.getToCountry() == null ? null : teams.getToCountry().getId());
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
-        teamsDTO.setLeaguesss(teams.getLeaguesss().stream()
-                .map(league -> league.getId())
-                .toList());
-        teamsDTO.setUlkedekiLigler(teams.getLeaguesss().stream()
+        teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
+        /*teamsDTO.setUlkedekiLigler(teams.getLeaguesss().stream()
                 .map(league -> league.getLeagueName())
-                .toList());
+                .toList());*/
         teamsDTO.setToTeamstoCompetitions(teams.getToTeamstoCompetitions().stream()
                 .map(competitions -> competitions.getId())
                 .toList());
@@ -97,19 +95,16 @@ public class TeamsService {
 
     private Teams mapToEntity(final TeamsDTO teamsDTO, final Teams teams) {
         teams.setTName(teamsDTO.getTName());
-        teams.setTCountry(teamsDTO.getTCountry());
-        teams.setTLeague(teamsDTO.getTLeague());
+        //teams.setTCountry(teamsDTO.getTCountry());
+        //teams.setTLeague(teamsDTO.getTLeague());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())
                 .orElseThrow(() -> new NotFoundException("toCountry not found"));
         teams.setToCountry(toCountry);
-        final List<League> leaguesss = iterableToList(leagueRepository.findAllById(
-                teamsDTO.getLeaguesss() == null ? Collections.emptyList() : teamsDTO.getLeaguesss()));
-        if (leaguesss.size() != (teamsDTO.getLeaguesss() == null ? 0 : teamsDTO.getLeaguesss().size())) {
-            throw new NotFoundException("one of leaguesss not found");
-        }
-        teams.setLeaguesss(leaguesss.stream().collect(Collectors.toSet()));
+        final League leaguesss = teamsDTO.getLeaguesss() == null ? null : leagueRepository.findById(teamsDTO.getLeaguesss())
+                .orElseThrow(() -> new NotFoundException("leaguesss not found"));
+        teams.setLeaguesss(leaguesss);
         final List<Competitions> toTeamstoCompetitions = iterableToList(competitionsRepository.findAllById(
                 teamsDTO.getToTeamstoCompetitions() == null ? Collections.emptyList() : teamsDTO.getToTeamstoCompetitions()));
         if (toTeamstoCompetitions.size() != (teamsDTO.getToTeamstoCompetitions() == null ? 0 : teamsDTO.getToTeamstoCompetitions().size())) {
