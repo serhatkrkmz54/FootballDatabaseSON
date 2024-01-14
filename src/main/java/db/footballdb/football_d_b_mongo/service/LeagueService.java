@@ -41,6 +41,7 @@ public class LeagueService {
                 .orElseThrow(NotFoundException::new);
     }
 
+
     public Long create(final LeagueDTO leagueDTO) {
         final League league = new League();
         mapToEntity(leagueDTO, league);
@@ -62,6 +63,7 @@ public class LeagueService {
                 .forEach(teams -> teams.setLeaguesss(null));
         leagueRepository.delete(league);
     }
+
 
     private LeagueDTO mapToDTO(final League league, final LeagueDTO leagueDTO) {
         leagueDTO.setId(league.getId());

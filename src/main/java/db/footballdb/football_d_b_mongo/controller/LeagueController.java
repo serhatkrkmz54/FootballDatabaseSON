@@ -1,8 +1,10 @@
 package db.footballdb.football_d_b_mongo.controller;
 
 import db.footballdb.football_d_b_mongo.domain.Country;
+import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.LeagueDTO;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
+import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.service.LeagueService;
 import db.footballdb.football_d_b_mongo.util.CustomCollectors;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/leagues")
@@ -25,11 +29,13 @@ public class LeagueController {
 
     private final LeagueService leagueService;
     private final CountryRepository countryRepository;
+    private final TeamsRepository teamsRepository;
 
     public LeagueController(final LeagueService leagueService,
-            final CountryRepository countryRepository) {
+            final CountryRepository countryRepository, final TeamsRepository teamsRepository){
         this.leagueService = leagueService;
         this.countryRepository = countryRepository;
+        this.teamsRepository = teamsRepository;
     }
 
     @ModelAttribute
@@ -43,6 +49,12 @@ public class LeagueController {
     public String list(final Model model) {
         model.addAttribute("leagues", leagueService.findAll());
         return "league/list";
+    }
+    @GetMapping("/{id}/teams")
+    public String listTeams(@PathVariable(name = "id") final Long id, final Model model) {
+        List<Teams> teams = teamsRepository.findByLeaguesssId(id);
+        model.addAttribute("teams", teams);
+        return "league/listele";
     }
 
     @GetMapping("/add")
@@ -78,6 +90,7 @@ public class LeagueController {
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("league.update.success"));
         return "redirect:/leagues";
     }
+
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") final Long id,
