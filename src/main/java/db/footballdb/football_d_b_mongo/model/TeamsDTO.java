@@ -48,6 +48,8 @@ public class TeamsDTO {
 
     private Long leaguesss;
 
+    private String leagueAdi;
+
     private List<String> ulkedekiLigler;
 
     private List<Long> toTeamstoCompetitions;

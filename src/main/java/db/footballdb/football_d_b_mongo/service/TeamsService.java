@@ -71,7 +71,7 @@ public class TeamsService {
         teamsRepository.deleteById(id);
     }
 
-    private TeamsDTO mapToDTO(final Teams teams, final TeamsDTO teamsDTO) {
+    public TeamsDTO mapToDTO(final Teams teams, final TeamsDTO teamsDTO) {
         teamsDTO.setId(teams.getId());
         teamsDTO.setTName(teams.getTName());
         //teamsDTO.setTCountry(teams.getTCountry());

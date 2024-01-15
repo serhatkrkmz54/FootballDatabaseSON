@@ -18,7 +18,6 @@ public interface TeamsRepository extends MongoRepository<Teams, Long> {
 
     List<Teams> findAllByLeaguesss(League league);
     List<Teams> findByLeaguesssId(Long leagueId);
-
     List<Teams> findAllByToTeamstoCompetitions(Competitions competitions);
 
 }

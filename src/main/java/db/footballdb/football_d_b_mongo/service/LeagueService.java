@@ -58,7 +58,6 @@ public class LeagueService {
     public void delete(final Long id) {
         final League league = leagueRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        // remove many-to-many relations at owning side
         teamsRepository.findAllByLeaguesss(league)
                 .forEach(teams -> teams.setLeaguesss(null));
         leagueRepository.delete(league);

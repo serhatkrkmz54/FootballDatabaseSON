@@ -1,11 +1,15 @@
 package db.footballdb.football_d_b_mongo.controller;
 
 import db.footballdb.football_d_b_mongo.domain.Country;
+import db.footballdb.football_d_b_mongo.domain.League;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.LeagueDTO;
+import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
+import db.footballdb.football_d_b_mongo.repos.LeagueRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.service.LeagueService;
+import db.footballdb.football_d_b_mongo.service.TeamsService;
 import db.footballdb.football_d_b_mongo.util.CustomCollectors;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
 import jakarta.validation.Valid;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -28,14 +33,19 @@ import java.util.List;
 public class LeagueController {
 
     private final LeagueService leagueService;
+    private final TeamsService teamsService;
     private final CountryRepository countryRepository;
     private final TeamsRepository teamsRepository;
 
+    private final LeagueRepository leagueRepository;
+
     public LeagueController(final LeagueService leagueService,
-            final CountryRepository countryRepository, final TeamsRepository teamsRepository){
+                            final CountryRepository countryRepository, final TeamsRepository teamsRepository, final TeamsService teamsService, LeagueRepository leagueRepository){
         this.leagueService = leagueService;
         this.countryRepository = countryRepository;
         this.teamsRepository = teamsRepository;
+        this.teamsService =  teamsService;
+        this.leagueRepository = leagueRepository;
     }
 
     @ModelAttribute
@@ -50,12 +60,33 @@ public class LeagueController {
         model.addAttribute("leagues", leagueService.findAll());
         return "league/list";
     }
+    // Lig-Takım eşleştirmesi burada
+
     @GetMapping("/{id}/teams")
     public String listTeams(@PathVariable(name = "id") final Long id, final Model model) {
+        League league = leagueRepository.findById(id).get();
         List<Teams> teams = teamsRepository.findByLeaguesssId(id);
-        model.addAttribute("teams", teams);
+        List<TeamsDTO> list = teams.stream()
+                .map(team -> {
+                    TeamsDTO teamsDTO = teamsService.mapToDTO(team, new TeamsDTO());
+                    teamsDTO.setLeagueAdi(team.getLeaguesss().getLeagueName());
+                    //teamsDTO.setLeaguesss(Long.valueOf(team.getLeaguesss().getLeagueName())); // Örnek olarak, League sınıfında bir "name" alanı varsa
+                    return teamsDTO;
+                })
+                .toList();
+        model.addAttribute("teams", list);
+        model.addAttribute("ligAdi", league.getLeagueName());
         return "league/listele";
     }
+//    @GetMapping("/{id}/teams")
+//    public String listTeams(@PathVariable(name = "id") final Long id, final Model model) {
+//        List<Teams> teams = teamsRepository.findByLeaguesssId(id);
+//        List<TeamsDTO> list = teams.stream()
+//                .map(league -> teamsService.mapToDTO(league, new TeamsDTO()))
+//                .toList();
+//        model.addAttribute("teams", list);
+//        return "league/listele";
+//    }
 
     @GetMapping("/add")
     public String add(@ModelAttribute("league") final LeagueDTO leagueDTO) {
