@@ -5,6 +5,7 @@
 - JPA/Lombok kullanılarak veritabanı işlemleri gerçekleştirilmiştir.
 - Tailwind CSS ile tasarlanmıştır.
 - Sorunsuz çalışmaktadır ve geliştirilme aşamasındadır.
+- (15.01.2024) Liglerin puan durumları eklendi. Girilen takımı ilgili lige atayıp o ligde sıralamaya sokabilirsiniz.
 
 ## Kurulum
 

@@ -74,16 +74,11 @@ public class TeamsService {
     public TeamsDTO mapToDTO(final Teams teams, final TeamsDTO teamsDTO) {
         teamsDTO.setId(teams.getId());
         teamsDTO.setTName(teams.getTName());
-        //teamsDTO.setTCountry(teams.getTCountry());
-        //teamsDTO.setTLeague(teams.getTLeague());
         teamsDTO.setTPoint(teams.getTPoint());
         teamsDTO.setTValue(teams.getTValue());
         teamsDTO.setToCountry(teams.getToCountry() == null ? null : teams.getToCountry().getId());
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
         teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
-        /*teamsDTO.setUlkedekiLigler(teams.getLeaguesss().stream()
-                .map(league -> league.getLeagueName())
-                .toList());*/
         teamsDTO.setToTeamstoCompetitions(teams.getToTeamstoCompetitions().stream()
                 .map(competitions -> competitions.getId())
                 .toList());
@@ -95,8 +90,6 @@ public class TeamsService {
 
     private Teams mapToEntity(final TeamsDTO teamsDTO, final Teams teams) {
         teams.setTName(teamsDTO.getTName());
-        //teams.setTCountry(teamsDTO.getTCountry());
-        //teams.setTLeague(teamsDTO.getTLeague());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())

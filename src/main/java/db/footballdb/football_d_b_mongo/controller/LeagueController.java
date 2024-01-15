@@ -70,7 +70,6 @@ public class LeagueController {
                 .map(team -> {
                     TeamsDTO teamsDTO = teamsService.mapToDTO(team, new TeamsDTO());
                     teamsDTO.setLeagueAdi(team.getLeaguesss().getLeagueName());
-                    //teamsDTO.setLeaguesss(Long.valueOf(team.getLeaguesss().getLeagueName())); // Örnek olarak, League sınıfında bir "name" alanı varsa
                     return teamsDTO;
                 })
                 .toList();
@@ -78,15 +77,6 @@ public class LeagueController {
         model.addAttribute("ligAdi", league.getLeagueName());
         return "league/listele";
     }
-//    @GetMapping("/{id}/teams")
-//    public String listTeams(@PathVariable(name = "id") final Long id, final Model model) {
-//        List<Teams> teams = teamsRepository.findByLeaguesssId(id);
-//        List<TeamsDTO> list = teams.stream()
-//                .map(league -> teamsService.mapToDTO(league, new TeamsDTO()))
-//                .toList();
-//        model.addAttribute("teams", list);
-//        return "league/listele";
-//    }
 
     @GetMapping("/add")
     public String add(@ModelAttribute("league") final LeagueDTO leagueDTO) {

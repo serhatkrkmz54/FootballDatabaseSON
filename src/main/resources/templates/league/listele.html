@@ -7,79 +7,67 @@
 <body>
 <div layout:fragment="content">
     <div class="flex flex-wrap mb-6">
-        <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[${ligAdi}]]</h1>
+        <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[${ligAdi + ' Puan Durumu'}]]</h1>
     </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <div th:if="${teams.empty}">[[#{teams.list.empty}]]</div>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-700">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Product
+                        #
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Takım Adı
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
+                        Oynadığı Maç
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                        Galibiyet
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        Beraberlik
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Mağlubiyet
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Attığı Gol
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Averaj
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Puan
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr th:each="teams, rowStat : ${teams}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
+                        <span th:text="${rowStat.count}"></span>
                     </th>
-                    <td class="px-6 py-4">
-                        Silver
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-50 dark:bg-gray-800">
+                        [[${teams.tName}]]
                     </td>
                     <td class="px-6 py-4">
-                        Laptop
+
+                    </td>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+
                     </td>
                     <td class="px-6 py-4">
-                        $2999
+
+                    </td>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+
                     </td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Microsoft Surface Pro
-                    </th>
-                    <td class="px-6 py-4">
-                        White
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="bg-white dark:bg-gray-800">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Magic Mouse 2
-                    </th>
-                    <td class="px-6 py-4">
-                        Black
-                    </td>
-                    <td class="px-6 py-4">
-                        Accessories
-                    </td>
-                    <td class="px-6 py-4">
-                        $99
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+
                     </td>
                 </tr>
                 </tbody>
