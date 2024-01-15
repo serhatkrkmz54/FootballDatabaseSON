@@ -22,6 +22,7 @@ public class CountryDTO {
     @JsonProperty("cName")
     private String cName;
 
+    @NotNull
     @Digits(integer = 10, fraction = 2)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("cValue")

@@ -35,6 +35,7 @@ public class Country {
     @Field(
             targetType = FieldType.DECIMAL128
     )
+    @NotNull
     private BigDecimal cValue;
 
     @NotNull
