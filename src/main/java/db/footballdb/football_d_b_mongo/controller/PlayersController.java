@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("/playerss")
+@RequestMapping("/players")
 public class PlayersController {
 
     private final PlayersService playersService;
@@ -65,7 +65,7 @@ public class PlayersController {
         }
         playersService.create(playersDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("players.create.success"));
-        return "redirect:/playerss";
+        return "redirect:/players";
     }
 
     @GetMapping("/edit/{id}")
@@ -83,7 +83,7 @@ public class PlayersController {
         }
         playersService.update(id, playersDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("players.update.success"));
-        return "redirect:/playerss";
+        return "redirect:/players";
     }
 
     @PostMapping("/delete/{id}")
@@ -91,7 +91,7 @@ public class PlayersController {
             final RedirectAttributes redirectAttributes) {
         playersService.delete(id);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("players.delete.success"));
-        return "redirect:/playerss";
+        return "redirect:/players";
     }
 
 }

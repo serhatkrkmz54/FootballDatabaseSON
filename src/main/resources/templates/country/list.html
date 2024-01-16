@@ -6,10 +6,20 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="flex flex-wrap mb-6">
-        <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{country.list.headline}]]</h1>
-        <div>
-            <a th:href="@{/countries/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{country.list.createNew}]]</a>
+    <div class="my-5 relative overflow-x-auto bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+        <div class="flex-row items-center justify-between p-5 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+            <div>
+                <p class="mr-3 mb-1 text-3xl font-semibold dark:text-white">[[#{country.list.headline}]]</p>
+                <p class="text-gray-500 dark:text-gray-400">Futbol dünyasındaki tüm ülkeleri ekleyebilirsiniz. Bilgilerin doğru olması şartıyla.</p>
+            </div>
+            <a th:href="@{/countries/add}">
+                <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
+                    </svg>
+                    [[#{country.list.createNew}]]
+                </button>
+            </a>
         </div>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

@@ -31,14 +31,6 @@ public class Teams {
     @Size(max = 255)
     private String tName;
 
-    /*@NotNull
-    @Size(max = 255)
-    private String tCountry;
-
-    @NotNull
-    @Size(max = 255)
-    private String tLeague;*/
-
     @NotNull
     private Integer tPoint;
 

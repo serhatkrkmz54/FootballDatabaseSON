@@ -76,6 +76,7 @@ public class PlayersService {
     }
 
     private Players mapToEntity(final PlayersDTO playersDTO, final Players players) {
+        players.setId(players.getId());
         players.setPName(playersDTO.getPName());
         players.setPSurname(playersDTO.getPSurname());
         players.setPCountry(playersDTO.getPCountry());

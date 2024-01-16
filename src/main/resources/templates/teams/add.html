@@ -9,14 +9,18 @@
             <div class="flex flex-wrap mb-6">
                 <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{teams.add.headline}]]</h1>
                 <div>
-                    <a th:href="@{/teamss}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{teams.add.back}]]</a>
+                    <a th:href="@{/teams}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{teams.add.back}]]</a>
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('teams')}" />
             <form th:action="${requestUri}" method="post">
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tName')}" />
-<!--                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tCountry')}" />-->
-                <!--<div th:replace="~{fragments/forms::inputRow(object='teams', field='tLeague')}" />-->
+<!--                    <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">-->
+<!--                        <label class="col-span-2 py-2"><span>Logo Yükle</span></label>-->
+<!--                        <div class="col-span-10">-->
+<!--                                <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">-->
+<!--                        </div>-->
+<!--                    </div>-->
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tValue')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toCountry', type='select')}" />

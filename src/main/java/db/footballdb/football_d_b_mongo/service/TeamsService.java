@@ -109,7 +109,7 @@ public class TeamsService {
 
     private <T> List<T> iterableToList(final Iterable<T> iterable) {
         final List<T> list = new ArrayList<T>();
-        iterable.forEach(item -> list.add(item));
+        iterable.forEach(list::add);
         return list;
     }
 

@@ -9,8 +9,9 @@
     <div class="flex flex-wrap mb-6">
         <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[${ligAdi + ' Puan Durumu'}]]</h1>
     </div>
+    <div th:if="${teams.empty}">[[#{teams.list.empty}]]</div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div th:if="${teams.empty}">[[#{teams.list.empty}]]</div>
+            <div th:if="${!teams.empty}" class="overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-700">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -72,6 +73,7 @@
                 </tr>
                 </tbody>
             </table>
+                </div>
         </div>
     </div>
 </body>

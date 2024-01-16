@@ -62,7 +62,7 @@ public class LeagueController {
     }
     // Lig-Takım eşleştirmesi burada
 
-    @GetMapping("/{id}/teams")
+    @GetMapping("/teams/{id}")
     public String listTeams(@PathVariable(name = "id") final Long id, final Model model) {
         League league = leagueRepository.findById(id).get();
         List<Teams> teams = teamsRepository.findByLeaguesssId(id);

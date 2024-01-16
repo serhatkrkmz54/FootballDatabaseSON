@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
@@ -35,6 +36,7 @@ public class TeamsDTO {
     @NotNull
     @JsonProperty("tPoint")
     private Integer tPoint;
+
 
     @NotNull
     @Digits(integer = 10, fraction = 2)

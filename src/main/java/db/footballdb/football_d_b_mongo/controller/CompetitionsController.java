@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("/competitionss")
+@RequestMapping("/competitions")
 public class CompetitionsController {
 
     private final CompetitionsService competitionsService;
@@ -44,7 +44,7 @@ public class CompetitionsController {
         }
         competitionsService.create(competitionsDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("competitions.create.success"));
-        return "redirect:/competitionss";
+        return "redirect:/competitions";
     }
 
     @GetMapping("/edit/{id}")
@@ -62,7 +62,7 @@ public class CompetitionsController {
         }
         competitionsService.update(id, competitionsDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("competitions.update.success"));
-        return "redirect:/competitionss";
+        return "redirect:/competitions";
     }
 
     @PostMapping("/delete/{id}")
@@ -75,7 +75,7 @@ public class CompetitionsController {
             competitionsService.delete(id);
             redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("competitions.delete.success"));
         }
-        return "redirect:/competitionss";
+        return "redirect:/competitions";
     }
 
 }
