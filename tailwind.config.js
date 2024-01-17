@@ -19,7 +19,7 @@ module.exports = {
   },
   fontFamily: {
     'body': [
-      'Inter',
+      'Nunito Sans',
       'ui-sans-serif',
       'system-ui',
       '-apple-system',
@@ -36,7 +36,7 @@ module.exports = {
       'Noto Color Emoji'
     ],
     'sans': [
-      'Inter',
+      'Nunito Sans',
       'ui-sans-serif',
       'system-ui',
       '-apple-system',
