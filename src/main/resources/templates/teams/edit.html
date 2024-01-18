@@ -13,11 +13,17 @@
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('teams')}" />
-            <form th:action="${requestUri}" method="post">
+            <form th:action="${requestUri}" method="post" enctype="multipart/form-data">
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='id', disabled=true, type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tName')}" />
-<!--                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tCountry')}" />-->
-<!--                <div th:replace="~{fragments/forms::inputRow(object='teams', field='tLeague')}" />-->
+                <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
+                    <label class="col-span-2 py-2"><span>Logo Yükle</span></label>
+                    <div class="col-span-10">
+                        <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                               aria-describedby="user_avatar_help" name="logo" value="logo" th:object="${teams}"
+                               th:field="*{pathFile}" type="file">
+                    </div>
+                </div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tValue')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toCountry', type='select')}" />

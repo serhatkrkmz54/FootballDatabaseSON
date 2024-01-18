@@ -13,12 +13,23 @@ import db.footballdb.football_d_b_mongo.repos.PlayersRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.util.NotFoundException;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartException;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -54,7 +65,7 @@ public class TeamsService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final TeamsDTO teamsDTO) {
+    public Long create(final TeamsDTO teamsDTO) throws IOException {
         final Teams teams = new Teams();
         mapToEntity(teamsDTO, teams);
         return teamsRepository.save(teams).getId();
@@ -63,7 +74,11 @@ public class TeamsService {
     public void update(final Long id, final TeamsDTO teamsDTO) {
         final Teams teams = teamsRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        mapToEntity(teamsDTO, teams);
+        try {
+            mapToEntity(teamsDTO, teams);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         teamsRepository.save(teams);
     }
 
@@ -76,6 +91,7 @@ public class TeamsService {
         teamsDTO.setTName(teams.getTName());
         teamsDTO.setTPoint(teams.getTPoint());
         teamsDTO.setTValue(teams.getTValue());
+        teamsDTO.setFilePath(teams.getPathFile());
         teamsDTO.setToCountry(teams.getToCountry() == null ? null : teams.getToCountry().getId());
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
         teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
@@ -88,10 +104,19 @@ public class TeamsService {
         return teamsDTO;
     }
 
-    private Teams mapToEntity(final TeamsDTO teamsDTO, final Teams teams) {
+    private Teams mapToEntity(final TeamsDTO teamsDTO, final Teams teams) throws IOException {
         teams.setTName(teamsDTO.getTName());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
+        if (teamsDTO.getPathFile() != null) {
+            byte[] image = Base64.encodeBase64(teamsDTO.getPathFile().getBytes(), false);
+            String result = new String(image);
+            teams.setPathFile(result);
+        } else {
+            String base64Image = "images/default.png";
+            byte[] imageBytes = Base64.decodeBase64(base64Image);
+            teams.setPathFile(null);
+        }
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())
                 .orElseThrow(() -> new NotFoundException("toCountry not found"));
         teams.setToCountry(toCountry);

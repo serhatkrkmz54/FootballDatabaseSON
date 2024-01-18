@@ -3,6 +3,8 @@ package db.footballdb.football_d_b_mongo.rest;
 import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.service.TeamsService;
 import jakarta.validation.Valid;
+
+import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,7 +40,7 @@ public class TeamsResource {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createTeams(@RequestBody @Valid final TeamsDTO teamsDTO) {
+    public ResponseEntity<Long> createTeams(@RequestBody @Valid final TeamsDTO teamsDTO) throws IOException {
         final Long createdId = teamsService.create(teamsDTO);
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }

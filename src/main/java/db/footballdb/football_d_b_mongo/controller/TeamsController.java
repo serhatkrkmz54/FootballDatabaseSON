@@ -16,7 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 
 @Controller
@@ -63,7 +66,7 @@ public class TeamsController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("teams") @Valid final TeamsDTO teamsDTO,
-                      final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+                      final BindingResult bindingResult, final RedirectAttributes redirectAttributes) throws IOException {
         if (bindingResult.hasErrors()) {
             return "teams/add";
         }

@@ -23,6 +23,9 @@ public class TeamsDTO {
     @JsonProperty("tName")
     private String tName;
 
+    private MultipartFile pathFile;
+
+    private String filePath;
     /*@NotNull
     @Size(max = 255)
     @JsonProperty("tCountry")

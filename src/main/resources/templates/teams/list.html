@@ -61,7 +61,8 @@
                         [[${teams.id}]]
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        LOGO
+                        <img th:if="${teams.filePath.empty}" src="/images/default.png" class="w-14 h-15">
+                        <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="w-14 h-15">
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         [[${teams.tName}]]

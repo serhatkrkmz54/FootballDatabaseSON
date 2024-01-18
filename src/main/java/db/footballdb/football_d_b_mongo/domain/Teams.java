@@ -34,6 +34,8 @@ public class Teams {
     @NotNull
     private Integer tPoint;
 
+    private String pathFile;
+
     @NotNull
     @Digits(integer = 10, fraction = 2)
     @Field(
