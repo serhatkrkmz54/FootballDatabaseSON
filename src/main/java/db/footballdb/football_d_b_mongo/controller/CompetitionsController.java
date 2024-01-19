@@ -61,7 +61,7 @@ public class CompetitionsController {
             return "competitions/edit";
         }
         competitionsService.update(id, competitionsDTO);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("competitions.update.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("competitions.update.success"));
         return "redirect:/competitions";
     }
 
@@ -73,7 +73,7 @@ public class CompetitionsController {
             redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
         } else {
             competitionsService.delete(id);
-            redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("competitions.delete.success"));
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("competitions.delete.success"));
         }
         return "redirect:/competitions";
     }

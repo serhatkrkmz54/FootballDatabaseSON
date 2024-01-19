@@ -108,7 +108,7 @@ public class LeagueController {
             return "league/edit";
         }
         leagueService.update(id, leagueDTO);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("league.update.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("league.update.success"));
         return "redirect:/leagues";
     }
 
@@ -121,7 +121,7 @@ public class LeagueController {
             redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
         } else {
             leagueService.delete(id);
-            redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("league.delete.success"));
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("league.delete.success"));
         }
         return "redirect:/leagues";
     }

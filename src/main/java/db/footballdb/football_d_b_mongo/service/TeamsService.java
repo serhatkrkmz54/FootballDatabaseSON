@@ -91,7 +91,7 @@ public class TeamsService {
         teamsDTO.setTName(teams.getTName());
         teamsDTO.setTPoint(teams.getTPoint());
         teamsDTO.setTValue(teams.getTValue());
-        teamsDTO.setFilePath(teams.getPathFile());
+        teamsDTO.setFilePath(teams.getPathFile() == null ? null : teams.getPathFile());
         teamsDTO.setToCountry(teams.getToCountry() == null ? null : teams.getToCountry().getId());
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
         teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
@@ -108,14 +108,18 @@ public class TeamsService {
         teams.setTName(teamsDTO.getTName());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
-        if (teamsDTO.getPathFile() != null) {
+        if (!teamsDTO.getPathFile().isEmpty()) {
             byte[] image = Base64.encodeBase64(teamsDTO.getPathFile().getBytes(), false);
             String result = new String(image);
             teams.setPathFile(result);
         } else {
-            String base64Image = "images/default.png";
-            byte[] imageBytes = Base64.decodeBase64(base64Image);
-            teams.setPathFile(null);
+            if (teamsDTO.getFilePath() == null || teamsDTO.getFilePath().isEmpty() ){
+                String base64Image = "images/default.png";
+                byte[] imageBytes = Base64.decodeBase64(base64Image);
+                teams.setPathFile(new String(imageBytes));
+            } else {
+                teams.setPathFile(teamsDTO.getFilePath());
+            }
         }
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())
                 .orElseThrow(() -> new NotFoundException("toCountry not found"));

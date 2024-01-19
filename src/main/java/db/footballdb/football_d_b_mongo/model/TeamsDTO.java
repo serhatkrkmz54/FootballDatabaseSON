@@ -26,15 +26,6 @@ public class TeamsDTO {
     private MultipartFile pathFile;
 
     private String filePath;
-    /*@NotNull
-    @Size(max = 255)
-    @JsonProperty("tCountry")
-    private String tCountry;
-
-    @NotNull
-    @Size(max = 255)
-    @JsonProperty("tLeague")
-    private String tLeague;*/
 
     @NotNull
     @JsonProperty("tPoint")

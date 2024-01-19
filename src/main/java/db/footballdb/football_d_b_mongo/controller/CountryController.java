@@ -75,7 +75,7 @@ public class CountryController {
             return "country/edit";
         }
         countryService.update(id, countryDTO);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("country.update.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("country.update.success"));
         return "redirect:/countries";
     }
 
@@ -87,7 +87,7 @@ public class CountryController {
             redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
         } else {
             countryService.delete(id);
-            redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("country.delete.success"));
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("country.delete.success"));
         }
         return "redirect:/countries";
     }

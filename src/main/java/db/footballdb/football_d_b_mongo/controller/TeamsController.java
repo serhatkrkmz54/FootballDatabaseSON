@@ -89,7 +89,7 @@ public class TeamsController {
             return "teams/edit";
         }
         teamsService.update(id, teamsDTO);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("teams.update.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("teams.update.success"));
         return "redirect:/teams";
     }
 
@@ -101,7 +101,7 @@ public class TeamsController {
             redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
         } else {
             teamsService.delete(id);
-            redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("teams.delete.success"));
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("teams.delete.success"));
         }
         return "redirect:/teams";
     }

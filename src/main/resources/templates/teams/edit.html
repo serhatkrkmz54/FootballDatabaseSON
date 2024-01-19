@@ -5,6 +5,25 @@
         <title>[[#{teams.edit.headline}]]</title>
     </head>
     <body>
+    <script>
+        const images = document.getElementById('images'),
+            preview = document.getElementById('preview');
+
+        images.addEventListener('change', function() {
+            preview.innerHTML = '';
+            [...this.files].map(file => {
+                const reader = new FileReader();
+                reader.addEventListener('load', function(){
+                    const image = new Image();
+                    image.height = 100;
+                    image.title = file.name;
+                    image.src = this.result;
+                    preview.appendChild(image);
+                });
+                reader.readAsDataURL(file);
+            })
+        });
+    </script>
         <div layout:fragment="content">
             <div class="flex flex-wrap mb-6">
                 <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{teams.edit.headline}]]</h1>
@@ -17,14 +36,16 @@
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='id', disabled=true, type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tName')}" />
                 <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
-                    <label class="col-span-2 py-2"><span>Logo Yükle</span></label>
+                    <label class="col-span-2 align-middle py-2"><span>Logo Yükle</span></label>
                     <div class="col-span-10">
                         <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                               aria-describedby="user_avatar_help" name="logo" value="logo" th:object="${teams}"
+                               aria-describedby="user_avatar_help" name="logo" th:value="*{pathFile}" th:object="${teams}"
                                th:field="*{pathFile}" type="file">
+                        <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="inline-block ml-3 w-20 h-20">
                     </div>
                 </div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />
+                <div class="hidden"><div th:replace="~{fragments/forms::inputRow(object='teams', field='filePath')}"/></div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tValue')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toCountry', type='select')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='leaguesss', type='select')}" />
