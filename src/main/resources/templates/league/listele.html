@@ -9,7 +9,7 @@
     <div class="flex flex-wrap mb-6">
         <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[${ligAdi + ' Puan Durumu'}]]</h1>
     </div>
-    <div th:if="${teams.empty}">[[#{teams.list.empty}]]</div>
+    <div th:if="${teams.empty}">[[#{teams.leaguelist.empty}]]</div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div th:if="${!teams.empty}" class="overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-700">
@@ -50,6 +50,7 @@
                         <span th:text="${rowStat.count}"></span>
                     </th>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-50 dark:bg-gray-800">
+                        <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="inline-block w-8 h-8 mr-1">
                         [[${teams.tName}]]
                     </td>
                     <td class="px-6 py-4">
