@@ -15,7 +15,6 @@
                 const reader = new FileReader();
                 reader.addEventListener('load', function(){
                     const image = new Image();
-                    image.height = 100;
                     image.title = file.name;
                     image.src = this.result;
                     preview.appendChild(image);
@@ -40,8 +39,8 @@
                     <div class="col-span-10">
                         <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                aria-describedby="user_avatar_help" name="logo" th:value="*{pathFile}" th:object="${teams}"
-                               th:field="*{pathFile}" type="file">
-                        <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="inline-block ml-3 w-20 h-20">
+                               th:field="*{pathFile}" type="file" >
+                        <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="inline-block ml-3 w-18 h-20">
                     </div>
                 </div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />

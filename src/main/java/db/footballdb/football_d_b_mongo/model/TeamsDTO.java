@@ -25,6 +25,8 @@ public class TeamsDTO {
 
     private MultipartFile pathFile;
 
+    @JsonProperty("filePath")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private String filePath;
 
     @NotNull
@@ -51,5 +53,7 @@ public class TeamsDTO {
     private List<Long> toTeamstoCompetitions;
 
     private List<String> takiminKatildigiMusabakalar;
+
+
 
 }

@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>[[#{teams.add.headline}]]</title>
-    <script>
-            function previewImage(input) {
-                var file = input.files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.querySelector('#preview').src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
+    <script type="text/javascript">
+        $(function(){
+            $("#resim").change(function(){//eğer file değişirse
+                var resim=document.getElementById ("resim");//resime eriş
+                if (resim.files && resim.files[0]){//eğer dosya var ise
+                    var veri=new FileReader();//veri okuma apisi başlatıyoruz.
+                    veri.onload=function() {//altta readAsDataURL verileri okuyoruz.O okuma tamamladığın da
+                        var adres=veri.result;//veriyi al
+                        $('.onizleme').html('<img src="'+adres+'"/>');//resim olarak çizdir.
+                    }
+                    veri.readAsDataURL(resim.files[0]);//veri okuma
                 }
-            }
+            });
+        })
     </script>
 </head>
 <body>
@@ -32,10 +36,10 @@
         <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
             <label class="col-span-2 py-2"><span>Logo Yükle</span></label>
             <div class="col-span-10">
-                <img id="preview" src="" alt="Preview" style="max-width: 100%; max-height: 200px;" />
                 <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                        aria-describedby="logo" name="logo" th:value="logo" th:object="${teams}"
-                       th:field="*{teams.pathFile}" type="file" accept="image/*" onchange="previewImage(this);">
+                       th:field="*{pathFile}" type="file" id="resim" accept="image/*">
+                <div class="onizleme ml-3 mt-2 mb-2 w-20 h-20"></div>
             </div>
         </div>
         <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}"/>
