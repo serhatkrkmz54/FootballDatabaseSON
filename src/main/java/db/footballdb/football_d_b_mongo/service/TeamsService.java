@@ -15,21 +15,17 @@ import db.footballdb.football_d_b_mongo.util.NotFoundException;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -57,6 +53,11 @@ public class TeamsService {
         return teamses.stream()
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .toList();
+    }
+
+    public Page<TeamsDTO> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber-1,5);
+        return teamsRepository.findAll(pageable).map(teams -> mapToDTO(teams, new TeamsDTO()));
     }
 
     public TeamsDTO get(final Long id) {
