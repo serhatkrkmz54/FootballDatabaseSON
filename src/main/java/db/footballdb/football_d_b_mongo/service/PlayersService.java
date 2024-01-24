@@ -4,11 +4,16 @@ import db.footballdb.football_d_b_mongo.domain.Country;
 import db.footballdb.football_d_b_mongo.domain.Players;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.PlayersDTO;
+import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
 import db.footballdb.football_d_b_mongo.repos.PlayersRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.util.NotFoundException;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +37,10 @@ public class PlayersService {
         return playerses.stream()
                 .map(players -> mapToDTO(players, new PlayersDTO()))
                 .toList();
+    }
+    public Page<PlayersDTO> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber-1,5);
+        return playersRepository.findAll(pageable).map(players -> mapToDTO(players, new PlayersDTO()));
     }
 
     public PlayersDTO get(final Long id) {

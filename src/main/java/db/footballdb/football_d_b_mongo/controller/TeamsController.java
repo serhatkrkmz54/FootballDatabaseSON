@@ -61,11 +61,11 @@ public class TeamsController {
         return getOnePage(model, 1);
     }
 
-    @GetMapping("/teams/list/page/{pageNumber}")
+    @GetMapping("/list/page/{pageNumber}")
     public String getOnePage(final Model model,@PathVariable("pageNumber") int currentPage) {
         Page<TeamsDTO> page = teamsService.findPage(currentPage);
         int totalPages = page.getTotalPages();
-        long totalItems = page.getTotalElements();
+        Long totalItems = page.getTotalElements();
         List<TeamsDTO> teamses = page.getContent();
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
