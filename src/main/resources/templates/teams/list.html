@@ -7,56 +7,56 @@
 <body>
 <div layout:fragment="content">
 
-            <div class="my-5 relative overflow-x-auto bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+    <div class="my-5 relative overflow-x-auto bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
 
-                <div class="flex-row items-center justify-between p-5 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
-                    <div>
-                        <p class="mr-3 mb-1 text-3xl font-semibold dark:text-white">[[#{teams.list.headline}]]</p>
-                        <p class="text-gray-500 dark:text-gray-400">Futbol dünyasındaki tüm takımları ekleyebilirsiniz. Bilgilerin doğru olması şartıyla.</p>
-                    </div>
-                    <a th:href="@{/teams/add}">
-                    <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
-                        </svg>
-                        [[#{teams.list.createNew}]]
-                    </button>
-                    </a>
-                </div>
+        <div class="flex-row items-center justify-between p-5 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+            <div>
+                <p class="mr-3 mb-1 text-3xl font-semibold dark:text-white">[[#{teams.list.headline}]]</p>
+                <p class="text-gray-500 dark:text-gray-400">Futbol dünyasındaki tüm takımları ekleyebilirsiniz. Bilgilerin doğru olması şartıyla.</p>
             </div>
+            <a th:href="@{/teams/add}">
+                <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
+                    </svg>
+                    [[#{teams.list.createNew}]]
+                </button>
+            </a>
+        </div>
+    </div>
     <div th:if="${teamses.empty}">[[#{teams.list.empty}]]</div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div th:if="${!teamses.empty}" class="overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    [[#{teams.id.label}]]
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Takım Logosu
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    [[#{teams.tName.label}]]
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    [[#{teams.tPoint.label}]]
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    [[#{teams.tValue.label}]]
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    [[#{teams.toCountry.label}]]
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    DÜZENLE
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    KALDIR
-                </th>
-            </tr>
-            </thead>
-            <tbody>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        [[#{teams.id.label}]]
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Takım Logosu
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        [[#{teams.tName.label}]]
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        [[#{teams.tPoint.label}]]
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        [[#{teams.tValue.label}]]
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        [[#{teams.toCountry.label}]]
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        DÜZENLE
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        KALDIR
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
 
                 <tr th:each="teams : ${teamses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
@@ -88,9 +88,9 @@
                         </form>
                     </td>
                 </tr>
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
             <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
                 <div class="flex flex-1 justify-between sm:hidden">
                     <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
@@ -109,19 +109,19 @@
                     </div>
                     <div>
                         <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                            <a href="#" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                                <span class="sr-only">Previous</span>
+                            <a th:if="${currentPage > 1}" th:href="@{'/teams/list/page/' + ${currentPage - 1}}" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span th:unless="${currentPage > 1}" class="sr-only">Önceki Sayfa</span>
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
                                 </svg>
                             </a>
-                            <span th:each="i: ${#numbers.sequence(1,totalPages)}">
-                            <a th:href="@{'/teams/list/page/'+ ${i}}" class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            <a th:each="i: ${#numbers.sequence(1,totalPages)}"
+                               th:href="@{'/teams/list/page/'+ ${i}}"
+                               th:class="${currentPage == i} ? 'relative block rounded bg-neutral-800 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-all duration-300 dark:bg-neutral-900' : 'relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-200  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white'">
                                 [[${i}]]
                             </a>
-                            </span>
-                            <a href="#" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                                <span class="sr-only">Next</span>
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/teams/list/page/' + ${currentPage + 1}}" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span th:unless="${currentPage < totalPages}"class="sr-only">Sonraki Sayfa</span>
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
                                 </svg>
@@ -130,8 +130,8 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-</div>
 </div>
 </body>
 </html>
