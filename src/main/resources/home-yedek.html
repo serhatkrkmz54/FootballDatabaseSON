@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>[[#{home.index.headline}]]</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-5 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
+            <div class="max-w-screen-md mb-8 lg:mb-16">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">[[#{home.index.headline}]]</h2>
+                <p class="text-gray-500 sm:text-xl dark:text-gray-400">[[#{home.index.exploreEntities}]]</p>
+            </div>
+            <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                <div>
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                        <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <a th:href="@{/players}"><h3 class="mb-2 text-xl font-bold dark:text-white">[[#{players.list.headline}]]</h3></a>
+                    <p class="text-gray-500 dark:text-gray-400">Futbolcu oluşturun!</p>
+                </div>
+                <div>
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                        <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path></svg>
+                    </div>
+                    <a th:href="@{/teams}"><h3 class="mb-2 text-xl font-bold dark:text-white">[[#{teams.list.headline}]]</h3></a>
+                    <p class="text-gray-500 dark:text-gray-400">Takım oluşturun!</p>
+                </div>
+                <div>
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                        <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg>
+                    </div>
+                    <a th:href="@{/countries}"><h3 class="mb-2 text-xl font-bold dark:text-white">[[#{country.list.headline}]]</h3></a>
+                    <p class="text-gray-500 dark:text-gray-400">Ülke takımı oluşturun!</p>
+                </div>
+                <div>
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                        <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <a th:href="@{/leagues}"><h3 class="mb-2 text-xl font-bold dark:text-white">[[#{league.list.headline}]]</h3></a>
+                    <p class="text-gray-500 dark:text-gray-400">Lig oluşturun!</p>
+                </div>
+                <div>
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                        <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+                    </div>
+                    <a th:href="@{/competitions}"><h3 class="mb-2 text-xl font-bold dark:text-white">[[#{competitions.list.headline}]]</h3></a>
+                    <p class="text-gray-500 dark:text-gray-400">Turnuva oluşturun!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
+
+
+
+
+
+<div class="my-5 relative overflow-x-auto bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+
+    <div class="flex-row items-center justify-between p-5 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+        <div>
+            <p class="mr-3 mb-1 text-3xl font-semibold dark:text-white">[[#{teams.list.headline}]]</p>
+            <p class="text-gray-500 dark:text-gray-400">Futbol dünyasındaki tüm takımları ekleyebilirsiniz. Bilgilerin doğru olması şartıyla.</p>
+        </div>
+        <a th:href="@{/teams/add}">
+            <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
+                </svg>
+                [[#{teams.list.createNew}]]
+            </button>
+        </a>
+    </div>
+</div>
+<div th:if="${teamses.empty}">[[#{teams.list.empty}]]</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div th:if="${!teamses.empty}" class="overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.id.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Takım Logosu
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tName.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tPoint.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.tValue.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    [[#{teams.toCountry.label}]]
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DÜZENLE
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    KALDIR
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="teams : ${teamses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    [[${teams.id}]]
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <img th:if="${teams.filePath.empty}" src="/images/default.png" class="w-14 h-15">
+                    <img th:if="${!teams.filePath.empty}" th:src="|data:image;base64,*{teams.filePath}|" class="w-14 h-15">
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    [[${teams.tName}]]
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    [[${teams.tPoint}]]
+                </td>
+                <td class="px-6 py-4">
+                    [['€'+${teams.tValue}]]
+                </td>
+                <td class="px-6 py-4">
+                    [[${teams.takimHangiUlkede}]]
+                </td>
+                <td class="px-6 py-4">
+                    <a th:href="@{/teams/edit/{id}(id=${teams.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">[[#{teams.list.edit}]]</a>
+                </td>
+                <td class="px-6 py-4">
+                    <form th:action="@{/teams/delete/{id}(id=${teams.id})}"
+                          th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
+                        <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">[[#{teams.list.delete}]]</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+            <div class="flex flex-1 justify-between sm:hidden">
+                <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+                <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+            </div>
+            <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm text-gray-700">
+                        Toplam Sayfa:
+                        <span class="font-medium">[[${totalPages}]]</span>
+                        Toplam Kayıt:
+                        <span class="font-medium">[[${totalItems}]]</span>
+                        Şuanki Sayfa:
+                        <span class="font-medium">[[${currentPage}]]</span>
+                    </p>
+                </div>
+                <div>
+                    <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                        <a th:if="${currentPage > 1}" th:href="@{'/teams/list/page/' + ${currentPage - 1}}" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span th:unless="${currentPage > 1}" class="sr-only">Önceki Sayfa</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a th:each="i: ${#numbers.sequence(1,totalPages)}"
+                           th:href="@{'/teams/list/page/'+ ${i}}"
+                           th:class="${currentPage == i} ? 'relative block rounded bg-neutral-800 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-all duration-300 dark:bg-neutral-900' : 'relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-200  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white'">
+                            [[${i}]]
+                        </a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/teams/list/page/' + ${currentPage + 1}}" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span th:unless="${currentPage < totalPages}"class="sr-only">Sonraki Sayfa</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -6,113 +6,281 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div class="my-5 relative overflow-x-auto bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-                <div class="flex-row items-center justify-between p-5 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
-                    <div>
-                        <p class="mr-3 mb-1 text-3xl font-semibold dark:text-white">[[#{players.list.headline}]]</p>
-                        <p class="text-gray-500 dark:text-gray-400">Futbol dünyasındaki tüm futbolcuları ekleyebilirsiniz. Bilgilerin doğru olması şartıyla.</p>
-                    </div>
-                    <a th:href="@{/players/add}">
-                        <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
-                            </svg>
-                            [[#{players.list.createNew}]]
+            <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+                <button type="button" class="text-lg text-gray-600 sidebar-toggle">
+                    <i class="ri-menu-line"></i>
+                </button>
+                <ul class="flex items-center text-sm ml-4">
+                    <li class="mr-2">
+                        <a th:href="@{/}" class="text-gray-400 hover:text-gray-600 font-medium">[[#{navigation.home}]]</a>
+                    </li>
+                    <li class="text-gray-600 mr-2 font-medium">/</li>
+                    <li class="text-gray-600 mr-2 font-medium">[[#{players.list.headline}]]</li>
+                </ul>
+                <ul class="ml-auto flex items-center">
+                    <li class="mr-1 dropdown">
+                        <button type="button" class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
+                            <i class="ri-search-line"></i>
                         </button>
-                    </a>
+                        <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
+                            <form action="" class="p-4 border-b border-b-gray-100">
+                                <div class="relative w-full">
+                                    <input type="text" class="py-2 pr-4 pl-10 bg-gray-50 w-full outline-none border border-gray-100 rounded-md text-sm focus:border-blue-500" placeholder="Search...">
+                                    <i class="ri-search-line absolute top-1/2 left-4 -translate-y-1/2 text-gray-400"></i>
+                                </div>
+                            </form>
+                            <li class="dropdown">
+                                <button type="button" class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
+                                    <i class="ri-notification-3-line"></i>
+                                </button>
+                                <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
+                                    <div class="flex items-center px-4 pt-4 border-b border-b-gray-100 notification-tab">
+                                        <button type="button" data-tab="notification" data-tab-page="notifications" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1 active">Bildirimler</button>
+                                        <button type="button" data-tab="notification" data-tab-page="messages" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1">Mesajlar</button>
+                                    </div>
+                                    <div class="my-2">
+                                        <ul class="max-h-64 overflow-y-auto" data-tab-for="notification" data-page="notifications">
+                                            <li>
+                                                <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
+                                                    <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                                    <div class="ml-2">
+                                                        <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">Oyuncu oluşturuldu</div>
+                                                        <div class="text-[11px] text-gray-400">serhat5454 kullanıcısı</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="max-h-64 overflow-y-auto hidden" data-tab-for="notification" data-page="messages">
+                                            <li>
+                                                <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
+                                                    <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                                    <div class="ml-2">
+                                                        <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">Serhat KORKMAZ</div>
+                                                        <div class="text-[11px] text-gray-400">Problem var!</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown ml-3">
+                                <button type="button" class="dropdown-toggle flex items-center">
+                                    <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                </button>
+                                <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                    <li>
+                                        <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profil</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Ayarlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Çıkış Yap</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                </ul>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                            <div class="flex justify-between mb-6">
+                                <div>
+                                    <div class="text-2xl font-semibold mb-1">10</div>
+                                    <div class="text-sm font-medium text-gray-400">Active orders</div>
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
+                                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-full bg-gray-100 rounded-full h-4">
+                                    <div class="h-full bg-blue-500 rounded-full p-1" style="width: 60%;">
+                                        <div class="w-2 h-2 rounded-full bg-white ml-auto"></div>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600 ml-4">60%</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                            <div class="flex justify-between mb-4">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <div class="text-2xl font-semibold">324</div>
+                                        <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">+30%</div>
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-400">Visitors</div>
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
+                                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block">
+                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                            <div class="flex justify-between mb-6">
+                                <div>
+                                    <div class="text-2xl font-semibold mb-1"><span class="text-base font-normal text-gray-400 align-top">&dollar;</span>2,345</div>
+                                    <div class="text-sm font-medium text-gray-400">Active orders</div>
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
+                                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="#" class="text-blue-500 font-medium text-sm hover:text-blue-600">View details</a>
+                        </div>
+                    </div>
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.id.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pName.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pSurname.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pPlayerAge.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pValue.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pCountry.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pWeight.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pHeight.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.pPosition.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    [[#{players.toTeams.label}]]
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    DÜZENLE
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    KALDIR
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div th:if="${playerses.empty}">[[#{players.list.empty}]]</div>
+                            <div th:if="${!playerses.empty}" class="overflow-x-auto">
+                                <tr th:each="players : ${playerses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        [[${players.id}]]
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        [[${players.pName}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pSurname}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pPlayerAge}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pValue}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pCountry}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pWeight}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pHeight}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.pPosition}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        [[${players.oyuncuHangiTakimda}]]
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a th:href="@{/players/edit/{id}(id=${players.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">[[#{players.list.edit}]]</a>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <form th:action="@{/players/delete/{id}(id=${players.id})}"
+                                              th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
+                                            <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">[[#{players.list.delete}]]</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                        <nav class="isolate inline-flex -space-x-px rounded-md p-6" aria-label="Pagination">
+                            <a th:if="${currentPage > 1}" th:href="@{'/players/list/page/' + ${currentPage - 1}}" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span th:unless="${currentPage > 1}" class="sr-only">Önceki Sayfa</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a th:each="i: ${#numbers.sequence(1,totalPages)}"
+                               th:href="@{'/teams/list/page/'+ ${i}}"
+                               th:class="${currentPage == i} ? 'relative block rounded bg-neutral-800 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-all duration-300 dark:bg-neutral-900' : 'relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-200  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white'">
+                                [[${i}]]
+                            </a>
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/players/list/page/' + ${currentPage + 1}}" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span th:unless="${currentPage < totalPages}" class="sr-only">Sonraki Sayfa</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </nav>
+                    </div>
                 </div>
             </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.id.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pName.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pSurname.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pPlayerAge.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pValue.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pCountry.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pWeight.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pHeight.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.pPosition.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            [[#{players.toTeams.label}]]
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            DÜZENLE
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            KALDIR
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <div th:if="${playerses.empty}">[[#{players.list.empty}]]</div>
-                    <div th:if="${!playerses.empty}" class="overflow-x-auto">
-                    <tr th:each="players : ${playerses}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                            [[${players.id}]]
-                        </td>
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            [[${players.pName}]]
-                        </td>
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            [[${players.pSurname}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.pPlayerAge}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [['€'+${players.pValue}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.pCountry}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.pWeight}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.pHeight}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.pPosition}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            [[${players.oyuncuHangiTakimda}]]
-                        </td>
-                        <td class="px-6 py-4">
-                            <a th:href="@{/players/edit/{id}(id=${players.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">[[#{players.list.edit}]]</a>
-                        </td>
-                        <td class="px-6 py-4">
-                            <form th:action="@{/players/delete/{id}(id=${players.id})}"
-                                  th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm inline">
-                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">[[#{players.list.delete}]]</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </div>
-                    </tbody>
-
-                </table>
             </div>
-        </div>
     </body>
 </html>

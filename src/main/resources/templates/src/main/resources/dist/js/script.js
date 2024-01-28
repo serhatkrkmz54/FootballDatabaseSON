@@ -1,37 +1,3 @@
-import 'css/app.css';
-
-
-/**
- * Register an event at the document for the specified selector,
- * so events are still catched after DOM changes.
- */
-function handleEvent(eventType, selector, handler) {
-    document.addEventListener(eventType, function(event) {
-        if (event.target.matches(selector + ', ' + selector + ' *')) {
-            handler.apply(event.target.closest(selector), arguments);
-        }
-    });
-}
-
-handleEvent('submit', '.js-submit-confirm', function(event) {
-    if (!confirm(this.getAttribute('data-confirm-message'))) {
-        event.preventDefault();
-        return false;
-    }
-    return true;
-});
-
-handleEvent('click', '.js-dropdown', function(event) {
-    document.querySelectorAll('.js-dropdown').forEach(($dropdown) => {
-        if (this === $dropdown ||
-                ($dropdown.getAttribute('data-dropdown-single') !== 'true' && $dropdown.ariaExpanded === 'true')) {
-            $dropdown.ariaExpanded = $dropdown.ariaExpanded !== 'true';
-            $dropdown.nextElementSibling.classList.toggle('hidden');
-        }
-    });
-    return false;
-});
-
 // start: Sidebar
 const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebarOverlay = document.querySelector('.sidebar-overlay')
@@ -161,3 +127,73 @@ document.querySelectorAll('[data-tab]').forEach(function (item) {
     })
 })
 // end: Tab
+
+
+
+// start: Chart
+new Chart(document.getElementById('order-chart'), {
+    type: 'line',
+    data: {
+        labels: generateNDays(7),
+        datasets: [
+            {
+                label: 'Active',
+                data: generateRandomData(7),
+                borderWidth: 1,
+                fill: true,
+                pointBackgroundColor: 'rgb(59, 130, 246)',
+                borderColor: 'rgb(59, 130, 246)',
+                backgroundColor: 'rgb(59 130 246 / .05)',
+                tension: .2
+            },
+            {
+                label: 'Completed',
+                data: generateRandomData(7),
+                borderWidth: 1,
+                fill: true,
+                pointBackgroundColor: 'rgb(16, 185, 129)',
+                borderColor: 'rgb(16, 185, 129)',
+                backgroundColor: 'rgb(16 185 129 / .05)',
+                tension: .2
+            },
+            {
+                label: 'Canceled',
+                data: generateRandomData(7),
+                borderWidth: 1,
+                fill: true,
+                pointBackgroundColor: 'rgb(244, 63, 94)',
+                borderColor: 'rgb(244, 63, 94)',
+                backgroundColor: 'rgb(244 63 94 / .05)',
+                tension: .2
+            },
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+function generateNDays(n) {
+    const data = []
+    for(let i=0; i<n; i++) {
+        const date = new Date()
+        date.setDate(date.getDate()-i)
+        data.push(date.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric'
+        }))
+    }
+    return data
+}
+function generateRandomData(n) {
+    const data = []
+    for(let i=0; i<n; i++) {
+        data.push(Math.round(Math.random() * 10))
+    }
+    return data
+}
+// end: Chart

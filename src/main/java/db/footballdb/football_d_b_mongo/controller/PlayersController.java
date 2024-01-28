@@ -3,12 +3,14 @@ package db.footballdb.football_d_b_mongo.controller;
 import db.footballdb.football_d_b_mongo.domain.Country;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.PlayersDTO;
+import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.service.PlayersService;
 import db.footballdb.football_d_b_mongo.util.CustomCollectors;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 
 @Controller
@@ -48,7 +52,19 @@ public class PlayersController {
 
     @GetMapping
     public String list(final Model model) {
-        model.addAttribute("playerses", playersService.findAll());
+        return getOnePage(model, 1);
+    }
+
+    @GetMapping("/list/page/{pageNumber}")
+    public String getOnePage(final Model model,@PathVariable("pageNumber") int currentPage) {
+        Page<PlayersDTO> page = playersService.findPage(currentPage);
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+        List<PlayersDTO> playerses = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("playerses", playerses);
         return "players/list";
     }
 
