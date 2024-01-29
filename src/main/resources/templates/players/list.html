@@ -170,7 +170,30 @@
                             <a href="#" class="text-blue-500 font-medium text-sm hover:text-blue-600">View details</a>
                         </div>
                     </div>
+                    <div class="sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <div class="flex items-center gap-x-3">
+                                <h2 class="text-lg font-medium text-gray-800 dark:text-white">[[#{players.list.headline}]]</h2>
+
+                                <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">Toplam [[${totalItems}]] veri</span>
+                            </div>
+
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Veriler anlık olarak güncellenmektedir...</p>
+                        </div>
+                        <div class="flex items-center mt-4 gap-x-3 p-5">
+                            <a th:href="@{/players/add}">
+                            <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+
+                                <span>[[#{players.list.createNew}]]</span>
+                            </button></a>
+                        </div>
+                    </div>
+
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -267,7 +290,7 @@
                                 </svg>
                             </a>
                             <a th:each="i: ${#numbers.sequence(1,totalPages)}"
-                               th:href="@{'/teams/list/page/'+ ${i}}"
+                               th:href="@{'/players/list/page/'+ ${i}}"
                                th:class="${currentPage == i} ? 'relative block rounded bg-neutral-800 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-all duration-300 dark:bg-neutral-900' : 'relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-200  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white'">
                                 [[${i}]]
                             </a>
