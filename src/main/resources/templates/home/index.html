@@ -179,7 +179,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Gün İçinde Girilen Veri</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${documentsCreatedToday}]]</h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${totalDocumentsCreatedToday}]]</h4>
                 </div>
             </div>
             <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
@@ -239,7 +239,7 @@
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{players.list.headline}]]</div>
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
+                    <a th:href="@{/players}" target="_blank"><button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button></a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -284,7 +284,7 @@
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{teams.list.headline}]]</div>
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
+                    <a th:href="@{/teams}" target="_blank"><button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button></a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -326,7 +326,7 @@
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{league.list.headline}]]</div>
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
+                    <a th:href="@{/leagues}" target="_blank"><button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button></a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -359,7 +359,7 @@
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{country.list.headline}]]</div>
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
+                    <a th:href="@{/countries}" target="_blank"><button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button></a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -392,7 +392,7 @@
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{competitions.list.headline}]]</div>
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
+                    <a th:href="@{/competitions}" target="_blank"><button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button></a>
                 </div>
             </div>
             <div class="overflow-x-auto">

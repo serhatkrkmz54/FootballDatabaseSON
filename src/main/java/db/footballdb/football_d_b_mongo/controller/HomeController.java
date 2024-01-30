@@ -1,5 +1,6 @@
 package db.footballdb.football_d_b_mongo.controller;
 
+import com.mongodb.client.MongoDatabase;
 import db.footballdb.football_d_b_mongo.domain.Competitions;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.*;
@@ -18,9 +19,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -50,23 +49,28 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        // Bugünün tarihini al
+        //Günlük girilen veri miktarını saydıran kod
         OffsetDateTime today = OffsetDateTime.now();
+        MongoDatabase database = mongoTemplate.getDb(); // mongoTemplate, MongoTemplate türünde bir nesne olmalıdır.
+        Set<String> collectionNames = database.listCollectionNames().into(new HashSet<>());
+        long totalDocumentsCreatedToday = 0;
+        for (String collectionName : collectionNames) {
+            Query todayQuery = new Query(Criteria.where("dateCreated")
+                    .gte(today.truncatedTo(ChronoUnit.DAYS))
+                    .lt(today.plusDays(1).truncatedTo(ChronoUnit.DAYS)));
 
-        // Query objesi oluşturarak gün içinde oluşturulan belgeleri filtrele
-        Query todayQuery = new Query(Criteria.where("dateCreated")
-                .gte(today.truncatedTo(ChronoUnit.DAYS))
-                .lt(today.plusDays(1).truncatedTo(ChronoUnit.DAYS)));
-
-        // Gün içinde oluşturulan belgelerin sayısını hesapla
-        long documentsCreatedToday = mongoTemplate.count(todayQuery, "teams");
+            long documentsCreatedToday = mongoTemplate.count(todayQuery, collectionName);
+            totalDocumentsCreatedToday += documentsCreatedToday;
+        }
 
         // MongoDB'deki tüm koleksiyon adlarını al
         Iterable<String> tumKoleksiyonlar = mongoTemplate.getCollectionNames();
+
         // primarySequence koleksiyonunu hariç tut - otomatik son id tutma koleksiyonu
         Iterable<String> koleksiyonFiltrele = StreamSupport.stream(tumKoleksiyonlar.spliterator(), false)
                 .filter(collectionName -> !collectionName.equals("primarySequence"))
                 .collect(Collectors.toList());
+
         // Her koleksiyon için belge sayısını hesapla
         Map<String, Long> collectionDocumentCounts = StreamSupport.stream(koleksiyonFiltrele.spliterator(), false)
                 .collect(Collectors.toMap(
@@ -105,9 +109,7 @@ public class HomeController {
         model.addAttribute("totalDocumentCount", totalDocumentCount);
         model.addAttribute("totalLeagues", totalLeagues);
         model.addAttribute("totalPlayers", totalPlayers);
-        model.addAttribute("documentsCreatedToday", documentsCreatedToday);
+        model.addAttribute("totalDocumentsCreatedToday", totalDocumentsCreatedToday);
         return "home/index";
     }
-
-
 }

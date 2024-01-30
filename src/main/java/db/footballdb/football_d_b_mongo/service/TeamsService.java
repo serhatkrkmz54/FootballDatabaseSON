@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+import io.micrometer.common.util.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -110,18 +111,13 @@ public class TeamsService {
         teams.setTName(teamsDTO.getTName());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
-        if (!teamsDTO.getPathFile().isEmpty()) {
+        if (StringUtils.isNotEmpty(String.valueOf(teamsDTO.getPathFile()))) {
             byte[] image = Base64.encodeBase64(teamsDTO.getPathFile().getBytes(), false);
-            String result = new String(image);
-            teams.setPathFile(result);
+            teams.setPathFile(new String(image));
         } else {
-            if (teamsDTO.getFilePath() == null || teamsDTO.getFilePath().isEmpty() ){
-                String base64Image = "/ images/default-teams-logo.png";
-                byte[] imageBytes = Base64.decodeBase64(base64Image);
-                teams.setPathFile(new String(imageBytes));
-            } else {
-                teams.setPathFile(teamsDTO.getFilePath());
-            }
+            String varsayilanResim = "/images/default-teams-logo.png";
+            byte[] defaultImageBytes = Base64.decodeBase64(varsayilanResim);
+            teams.setPathFile(new String(defaultImageBytes));
         }
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())
                 .orElseThrow(() -> new NotFoundException("toCountry not found"));
