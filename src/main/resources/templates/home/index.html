@@ -81,7 +81,7 @@
                 </div>
         </ul>
         <div class="min-w-[375px] p-6 md:min-w-[700px] xl:min-w-[800px] mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
-            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+            <div class="relative flex flex-grow !flex-row items-center rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
                 <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
                     <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
                         <span class="flex items-center text-brand-500 dark:text-white">
@@ -102,8 +102,8 @@
                     </div>
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Earnings</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$340.5</h4>
+                    <p class="font-dm text-sm font-medium text-gray-600">Veritabanındaki Toplam Veri</p>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"><span th:text="${totalDocumentCount}"></span></h4>
                 </div>
             </div>
             <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
@@ -128,8 +128,8 @@
                     </div>
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Spend this month</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$642.39</h4>
+                    <p class="font-dm text-sm font-medium text-gray-600">Toplam Lig Sayısı</p>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${totalLeagues}]]</h4>
                 </div>
             </div>
             <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
@@ -153,8 +153,8 @@
                     </div>
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Sales</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$574.34</h4>
+                    <p class="font-dm text-sm font-medium text-gray-600">Toplam Oyuncu Sayısı</p>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${totalPlayers}]]</h4>
                 </div>
             </div>
             <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
@@ -178,8 +178,8 @@
                     </div>
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Your Balance</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$1,000</h4>
+                    <p class="font-dm text-sm font-medium text-gray-600">Gün İçinde Girilen Veri</p>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${documentsCreatedToday}]]</h4>
                 </div>
             </div>
             <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
@@ -234,23 +234,12 @@
         </div>
         <div class="p-6">
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 bg-gray-100">
+        <div class="bg-white border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{players.list.headline}]]</div>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -294,19 +283,8 @@
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{teams.list.headline}]]</div>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -347,19 +325,8 @@
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{league.list.headline}]]</div>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -391,19 +358,8 @@
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{country.list.headline}]]</div>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -435,19 +391,8 @@
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{competitions.list.headline}]]</div>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button class="text-white transition-colors duration-200 bg-blue-500 rounded-lg text-xs font-bold uppercase px-3 py-1 outline-none hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600" type="button">Tümünü Gör</button>
                 </div>
             </div>
             <div class="overflow-x-auto">

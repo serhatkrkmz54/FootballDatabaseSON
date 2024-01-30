@@ -6,15 +6,15 @@
     <title>[[#{teams.add.headline}]]</title>
     <script type="text/javascript">
         $(function(){
-            $("#resim").change(function(){//eğer file değişirse
-                var resim=document.getElementById ("resim");//resime eriş
-                if (resim.files && resim.files[0]){//eğer dosya var ise
-                    var veri=new FileReader();//veri okuma apisi başlatıyoruz.
-                    veri.onload=function() {//altta readAsDataURL verileri okuyoruz.O okuma tamamladığın da
-                        var adres=veri.result;//veriyi al
-                        $('.onizleme').html('<img src="'+adres+'"/>');//resim olarak çizdir.
+            $("#resim").change(function(){
+                var resim=document.getElementById ("resim");
+                if (resim.files && resim.files[0]){
+                    var veri=new FileReader();
+                    veri.onload=function() {
+                        var adres=veri.result;
+                        $('.onizleme').html('<img src="'+adres+'"/>');
                     }
-                    veri.readAsDataURL(resim.files[0]);//veri okuma
+                    veri.readAsDataURL(resim.files[0]);
                 }
             });
         })
@@ -38,7 +38,7 @@
             <div class="col-span-10">
                 <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                        aria-describedby="logo" name="logo" th:value="logo" th:object="${teams}"
-                       th:field="*{pathFile}" type="file" id="resim" accept="image/*">
+                       th:field="*{pathFile}" type="file" id="resim">
                 <div class="onizleme ml-3 mt-2 mb-2 w-20 h-20"></div>
             </div>
         </div>

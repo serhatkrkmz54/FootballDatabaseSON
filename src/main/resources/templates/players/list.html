@@ -87,8 +87,8 @@
                         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                             <div class="flex justify-between mb-6">
                                 <div>
-                                    <div class="text-2xl font-semibold mb-1">10</div>
-                                    <div class="text-sm font-medium text-gray-400">Active orders</div>
+                                    <div class="text-2xl font-semibold mb-1">[[${totalItems}]]</div>
+                                    <div class="text-sm font-medium text-gray-400">Toplam Oyuncu</div>
                                 </div>
                                 <div class="dropdown">
                                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
@@ -107,21 +107,20 @@
                             </div>
                             <div class="flex items-center">
                                 <div class="w-full bg-gray-100 rounded-full h-4">
-                                    <div class="h-full bg-blue-500 rounded-full p-1" style="width: 60%;">
+                                    <div class="h-full bg-blue-500 rounded-full p-1" style="width: 100%;">
                                         <div class="w-2 h-2 rounded-full bg-white ml-auto"></div>
                                     </div>
                                 </div>
-                                <span class="text-sm font-medium text-gray-600 ml-4">60%</span>
+                                <span class="text-sm font-medium text-gray-600 ml-4">1%</span>
                             </div>
                         </div>
                         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                             <div class="flex justify-between mb-4">
                                 <div>
                                     <div class="flex items-center mb-1">
-                                        <div class="text-2xl font-semibold">324</div>
-                                        <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">+30%</div>
+                                        <div class="text-2xl font-semibold">€324.52</div>
                                     </div>
-                                    <div class="text-sm font-medium text-gray-400">Visitors</div>
+                                    <div class="text-sm font-medium text-gray-400">tüm oyuncuların toplam değeri</div>
                                 </div>
                                 <div class="dropdown">
                                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
@@ -139,18 +138,18 @@
                                 </div>
                             </div>
                             <div class="flex items-center">
-                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block">
-                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
-                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
-                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
-                                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://img.a.transfermarkt.technology/portrait/big/28396-1696447661.png?lm=1" alt="" class="w-8 h-8 rounded-full object-cover block">
+                                <img src="https://img.a.transfermarkt.technology/portrait/big/28003-1694590254.jpg?lm=1" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://img.a.transfermarkt.technology/portrait/big/8198-1694609670.jpg?lm=1" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://img.a.transfermarkt.technology/portrait/big/191614-1698609730.png?lm=1" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
+                                <img src="https://img.a.transfermarkt.technology/portrait/big/68863-1671105169.png?lm=1" alt="" class="w-8 h-8 rounded-full object-cover block -ml-3">
                             </div>
                         </div>
                         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                             <div class="flex justify-between mb-6">
                                 <div>
-                                    <div class="text-2xl font-semibold mb-1"><span class="text-base font-normal text-gray-400 align-top">&dollar;</span>2,345</div>
-                                    <div class="text-sm font-medium text-gray-400">Active orders</div>
+                                    <div class="text-2xl font-semibold mb-1"><span class="text-base font-normal text-gray-400 align-top"></span>2,345</div>
+                                    <div class="text-sm font-medium text-gray-400">girilecek oyuncu sayısı</div>
                                 </div>
                                 <div class="dropdown">
                                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
@@ -167,7 +166,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <a href="#" class="text-blue-500 font-medium text-sm hover:text-blue-600">View details</a>
+                            <a href="#" class="text-blue-500 font-medium text-sm hover:text-blue-600">Detayları Gör</a>
                         </div>
                     </div>
                     <div class="sm:flex sm:items-center sm:justify-between">
@@ -186,7 +185,6 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-
                                 <span>[[#{players.list.createNew}]]</span>
                             </button></a>
                         </div>

@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -92,7 +93,7 @@ public class TeamsService {
         teamsDTO.setTName(teams.getTName());
         teamsDTO.setTPoint(teams.getTPoint());
         teamsDTO.setTValue(teams.getTValue());
-        teamsDTO.setFilePath(teams.getPathFile() == null ? null : teams.getPathFile());
+        teamsDTO.setFilePath((teams.getPathFile() == null || teams.getPathFile().isEmpty()) ? null : teams.getPathFile());
         teamsDTO.setToCountry(teams.getToCountry() == null ? null : teams.getToCountry().getId());
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
         teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
@@ -115,7 +116,7 @@ public class TeamsService {
             teams.setPathFile(result);
         } else {
             if (teamsDTO.getFilePath() == null || teamsDTO.getFilePath().isEmpty() ){
-                String base64Image = "images/default.png";
+                String base64Image = "/ images/default-teams-logo.png";
                 byte[] imageBytes = Base64.decodeBase64(base64Image);
                 teams.setPathFile(new String(imageBytes));
             } else {
