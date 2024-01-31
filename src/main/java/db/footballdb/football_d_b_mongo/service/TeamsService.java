@@ -58,7 +58,7 @@ public class TeamsService {
     }
 
     public Page<TeamsDTO> findPage(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber-1,5);
+        Pageable pageable = PageRequest.of(pageNumber-1,10);
         return teamsRepository.findAll(pageable).map(teams -> mapToDTO(teams, new TeamsDTO()));
     }
 

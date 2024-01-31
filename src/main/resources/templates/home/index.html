@@ -87,7 +87,7 @@
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
                                 stroke="currentColor"
-                                fill="currentColor"
+                                fill="#38bdf8"
                                 stroke-width="0"
                                 viewBox="0 0 24 24"
                                 class="h-7 w-7"
@@ -106,13 +106,13 @@
                     <h4 class="text-xl font-bold text-navy-700 dark:text-white"><span th:text="${totalDocumentCount}"></span></h4>
                 </div>
             </div>
-            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
                 <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
                     <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
                                 stroke="currentColor"
-                                fill="currentColor"
+                                fill="#db2777"
                                 stroke-width="0"
                                 viewBox="0 0 512 512"
                                 class="h-6 w-6"
@@ -138,7 +138,7 @@
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
                                 stroke="currentColor"
-                                fill="currentColor"
+                                fill="#0369a1"
                                 stroke-width="0"
                                 viewBox="0 0 24 24"
                                 class="h-7 w-7"
@@ -163,7 +163,7 @@
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
                                 stroke="currentColor"
-                                fill="currentColor"
+                                fill="#1d4ed8"
                                 stroke-width="0"
                                 viewBox="0 0 24 24"
                                 class="h-6 w-6"
@@ -180,60 +180,11 @@
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Gün İçinde Girilen Veri</p>
                     <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${totalDocumentsCreatedToday}]]</h4>
-                </div>
-            </div>
-            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
-                <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
-                    <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
-                        <span class="flex items-center text-brand-500 dark:text-white">
-                        <svg
-                                stroke="currentColor"
-                                fill="currentColor"
-                                stroke-width="0"
-                                viewBox="0 0 24 24"
-                                class="h-7 w-7"
-                                height="1em"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path d="M4 9h4v11H4zM16 13h4v7h-4zM10 4h4v16h-4z"></path>
-                        </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">New Tasks</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">145</h4>
-                </div>
-            </div>
-            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
-                <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
-                    <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
-                        <span class="flex items-center text-brand-500 dark:text-white">
-                        <svg
-                                stroke="currentColor"
-                                fill="currentColor"
-                                stroke-width="0"
-                                viewBox="0 0 512 512"
-                                class="h-6 w-6"
-                                height="1em"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M208 448V320h96v128h97.6V256H464L256 64 48 256h62.4v192z"></path>
-                        </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Total Projects</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$2433</h4>
+                    <span th:text="${#temporals.format(today, 'dd-MM-yyyy HH:mm:ss')}" id="currentDateTime"></span>
                 </div>
             </div>
         </div>
         <div class="p-6">
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 bg-gray-100">
         <div class="bg-white border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
@@ -419,5 +370,6 @@
 </div>
     </div>
 </div>
+
 </body>
 </html>

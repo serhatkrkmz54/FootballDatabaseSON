@@ -110,6 +110,7 @@ public class HomeController {
         model.addAttribute("totalLeagues", totalLeagues);
         model.addAttribute("totalPlayers", totalPlayers);
         model.addAttribute("totalDocumentsCreatedToday", totalDocumentsCreatedToday);
+        model.addAttribute("today", today);
         return "home/index";
     }
 }

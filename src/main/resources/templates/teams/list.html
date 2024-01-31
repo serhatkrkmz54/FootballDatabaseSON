@@ -207,8 +207,8 @@
                                 [[${teams.id}]]
                             </th>
                             <td class="px-6 py-4">
-                                <img th:if="${teams.filePath == null or teams.filePath.isEmpty()}" src="/images/default-teams-logo.png" class="w-14 h-15">
-                                <img th:if="${teams.filePath != null and !teams.filePath.isEmpty()}" th:src="@{|data:image;base64,${teams.filePath}|}" class="w-14 h-15">
+                                <img th:if="${teams.filePath == null or teams.filePath.isEmpty()}" src="/images/default-teams-logo.png" class="w-10 h-10">
+                                <img th:if="${teams.filePath != null and !teams.filePath.isEmpty()}" th:src="@{|data:image;base64,${teams.filePath}|}" class="w-10 h-10">
                             </td>
                             <td class="px-6 py-4">
                                 [[${teams.tName}]]

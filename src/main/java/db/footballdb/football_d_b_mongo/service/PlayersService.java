@@ -40,7 +40,7 @@ public class PlayersService {
     }
 
     public Page<PlayersDTO> findPage(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber-1,5);
+        Pageable pageable = PageRequest.of(pageNumber-1,10);
         return playersRepository.findAll(pageable).map(players -> mapToDTO(players, new PlayersDTO()));
     }
 
