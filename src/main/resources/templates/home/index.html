@@ -180,12 +180,12 @@
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Gün İçinde Girilen Veri</p>
                     <h4 class="text-xl font-bold text-navy-700 dark:text-white">[[${totalDocumentsCreatedToday}]]</h4>
-                    <span th:text="${#temporals.format(today, 'dd-MM-yyyy HH:mm:ss')}" id="currentDateTime"></span>
+                    <span th:text="${#temporals.format(today, 'dd-MM-yyyy')}" id="currentDateTime"></span>
                 </div>
             </div>
         </div>
         <div class="p-6">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 bg-gray-100">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="bg-white border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div class="font-medium">[[#{players.list.headline}]]</div>
