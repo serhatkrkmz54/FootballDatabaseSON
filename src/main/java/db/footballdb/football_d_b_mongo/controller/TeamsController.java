@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -67,10 +68,12 @@ public class TeamsController {
         int totalPages = page.getTotalPages();
         long totalItems = page.getTotalElements();
         List<TeamsDTO> teamses = page.getContent();
+        BigDecimal toplamDeger = teamsService.getToplamTakimDegeri();
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("teamses", teamses);
+        model.addAttribute("toplamDeger", toplamDeger);
         return "teams/list";
     }
 

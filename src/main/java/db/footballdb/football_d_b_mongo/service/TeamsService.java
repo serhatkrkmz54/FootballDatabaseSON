@@ -15,6 +15,7 @@ import db.footballdb.football_d_b_mongo.util.NotFoundException;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +39,6 @@ public class TeamsService {
     private final LeagueRepository leagueRepository;
     private final CompetitionsRepository competitionsRepository;
     private final PlayersRepository playersRepository;
-
     public TeamsService(final TeamsRepository teamsRepository,
             final CountryRepository countryRepository, final LeagueRepository leagueRepository,
             final CompetitionsRepository competitionsRepository,
@@ -56,12 +56,17 @@ public class TeamsService {
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .toList();
     }
-
+    public BigDecimal getToplamTakimDegeri() {
+        List<Teams> takimListesi = teamsRepository.findAll();
+        BigDecimal toplamDeger = takimListesi.stream()
+                .map(Teams::getTValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return toplamDeger;
+    }
     public Page<TeamsDTO> findPage(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber-1,10);
         return teamsRepository.findAll(pageable).map(teams -> mapToDTO(teams, new TeamsDTO()));
     }
-
     public TeamsDTO get(final Long id) {
         return teamsRepository.findById(id)
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
