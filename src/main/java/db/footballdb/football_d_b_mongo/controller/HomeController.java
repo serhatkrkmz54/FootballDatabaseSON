@@ -47,7 +47,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String index(Model model) {
         //Günlük girilen veri miktarını saydıran kod
         OffsetDateTime today = OffsetDateTime.now();

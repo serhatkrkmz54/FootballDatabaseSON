@@ -5,24 +5,6 @@
         <title>[[#{teams.edit.headline}]]</title>
     </head>
     <body>
-    <script>
-        const images = document.getElementById('images'),
-            preview = document.getElementById('preview');
-
-        images.addEventListener('change', function() {
-            preview.innerHTML = '';
-            [...this.files].map(file => {
-                const reader = new FileReader();
-                reader.addEventListener('load', function(){
-                    const image = new Image();
-                    image.title = file.name;
-                    image.src = this.result;
-                    preview.appendChild(image);
-                });
-                reader.readAsDataURL(file);
-            })
-        });
-    </script>
         <div layout:fragment="content">
             <div class="flex flex-wrap mb-6">
                 <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{teams.edit.headline}]]</h1>
@@ -38,13 +20,13 @@
                     <label class="col-span-2 align-middle py-2"><span>Logo Yükle</span></label>
                     <div class="col-span-10">
                         <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                               aria-describedby="user_avatar_help" name="logo" th:value="*{pathFile}" th:object="${teams}"
+                               aria-describedby="user_avatar_help" name="logo" th:value="*{filePath}" th:object="${teams}"
                                th:field="*{pathFile}" type="file" >
                         <img th:if="${teams.filePath != null and !teams.filePath.isEmpty()}" th:src="@{|data:image;base64,${teams.filePath}|}" class="inline-block ml-3 w-18 h-20">
                     </div>
                 </div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}" />
-                <div class="hidden"><div th:replace="~{fragments/forms::inputRow(object='teams', field='filePath')}"/></div>
+                <div class="hidden"><div th:replace="~{fragments/forms::inputRow(object='teams', field='filePath', type='text')}"/></div>
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='tValue')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='toCountry', type='select')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='teams', field='leaguesss', type='select')}" />

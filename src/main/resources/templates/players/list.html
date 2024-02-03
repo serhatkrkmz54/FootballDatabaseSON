@@ -88,7 +88,7 @@
                             <div class="flex justify-between mb-6">
                                 <div>
                                     <div class="text-2xl font-semibold mb-1">[[${totalItems}]]</div>
-                                    <div class="text-sm font-medium text-gray-400">Toplam Oyuncu</div>
+                                    <div class="text-sm font-medium text-gray-400">veritabanındaki oyuncu sayısı</div>
                                 </div>
                                 <div class="dropdown">
                                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
@@ -118,7 +118,7 @@
                             <div class="flex justify-between mb-4">
                                 <div>
                                     <div class="flex items-center mb-1">
-                                        <div class="text-2xl font-semibold">€324.52</div>
+                                        <div class="text-2xl font-semibold">[['€'+${oyuncuToplamDeger}]]</div>
                                     </div>
                                     <div class="text-sm font-medium text-gray-400">tüm oyuncuların toplam değeri</div>
                                 </div>
@@ -199,6 +199,9 @@
                                     [[#{players.id.label}]]
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    FOTOĞRAF
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     [[#{players.pName.label}]]
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -240,6 +243,10 @@
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         [[${players.id}]]
                                     </th>
+                                    <td class="px-6 py-4">
+                                        <img th:if="${players.yolResmi == null or players.yolResmi.isEmpty()}" src="/images/default-players-pic.png" class="w-10 h-10">
+                                        <img th:if="${players.yolResmi != null and !players.yolResmi.isEmpty()}" th:src="@{|data:image;base64,${players.yolResmi}|}" class="w-10 h-10">
+                                    </td>
                                     <td class="px-6 py-4">
                                         [[${players.pName}]]
                                     </td>

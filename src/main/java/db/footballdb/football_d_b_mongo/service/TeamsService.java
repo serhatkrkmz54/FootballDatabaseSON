@@ -16,13 +16,14 @@ import db.footballdb.football_d_b_mongo.util.WebUtils;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-import io.micrometer.common.util.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -104,10 +105,10 @@ public class TeamsService {
         teamsDTO.setTakimHangiUlkede(teams.getToCountry() == null ? null : teams.getToCountry().getCName());
         teamsDTO.setLeaguesss(teams.getLeaguesss() == null ? null : teams.getLeaguesss().getId());
         teamsDTO.setToTeamstoCompetitions(teams.getToTeamstoCompetitions().stream()
-                .map(competitions -> competitions.getId())
+                .map(Competitions::getId)
                 .toList());
         teamsDTO.setTakiminKatildigiMusabakalar(teams.getToTeamstoCompetitions().stream()
-                .map(competitions -> competitions.getCompetitionName())
+                .map(Competitions::getCompetitionName)
                 .toList());
         return teamsDTO;
     }
@@ -116,13 +117,19 @@ public class TeamsService {
         teams.setTName(teamsDTO.getTName());
         teams.setTPoint(teamsDTO.getTPoint());
         teams.setTValue(teamsDTO.getTValue());
-        if (StringUtils.isNotEmpty(String.valueOf(teamsDTO.getPathFile()))) {
+        if (teamsDTO.getPathFile()  != null && !teamsDTO.getPathFile().isEmpty()) {
             byte[] image = Base64.encodeBase64(teamsDTO.getPathFile().getBytes(), false);
-            teams.setPathFile(new String(image));
+            String result = new String(image);
+            teams.setPathFile(result);
         } else {
-            String varsayilanResim = "/images/default-teams-logo.png";
-            byte[] defaultImageBytes = Base64.decodeBase64(varsayilanResim);
-            teams.setPathFile(new String(defaultImageBytes));
+            if (teamsDTO.getFilePath() == null || teamsDTO.getFilePath().isEmpty()){
+                String base64Image = "src/main/resources/static/images/default-teams-logo.png";
+                byte[] imageBytes = Base64.encodeBase64(Files.readAllBytes(Paths.get(base64Image)), false);
+                String defaultResult = new String(imageBytes);
+                teams.setPathFile(defaultResult);
+            } else {
+                teams.setPathFile(teamsDTO.getFilePath());
+            }
         }
         final Country toCountry = teamsDTO.getToCountry() == null ? null : countryRepository.findById(teamsDTO.getToCountry())
                 .orElseThrow(() -> new NotFoundException("toCountry not found"));

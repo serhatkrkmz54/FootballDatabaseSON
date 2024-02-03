@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -61,10 +63,12 @@ public class PlayersController {
         int totalPages = page.getTotalPages();
         long totalItems = page.getTotalElements();
         List<PlayersDTO> playerses = page.getContent();
+        BigDecimal oyuncuToplamDeger = playersService.getOyuncuDegeri();
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("playerses", playerses);
+        model.addAttribute("oyuncuToplamDeger", oyuncuToplamDeger);
         return "players/list";
     }
 
@@ -75,7 +79,7 @@ public class PlayersController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("players") @Valid final PlayersDTO playersDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) throws IOException {
         if (bindingResult.hasErrors()) {
             return "players/add";
         }
@@ -93,7 +97,7 @@ public class PlayersController {
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id,
             @ModelAttribute("players") @Valid final PlayersDTO playersDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) throws IOException {
         if (bindingResult.hasErrors()) {
             return "players/edit";
         }

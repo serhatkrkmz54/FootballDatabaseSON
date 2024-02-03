@@ -34,12 +34,12 @@
     <form th:action="${requestUri}" method="post" enctype="multipart/form-data">
         <div th:replace="~{fragments/forms::inputRow(object='teams', field='tName')}"/>
         <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
-            <label class="col-span-2 py-2"><span>Logo Yükle</span></label>
-            <div class="col-span-10">
+            <label class="col-span-2 align-middle py-2"><span>Logo Yükle</span></label>
+            <div class="col-span-10 flex items-center">
                 <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                       aria-describedby="logo" name="logo" th:value="logo" th:object="${teams}"
+                       aria-describedby="logo" name="logo" th:value="*{pathFile}" th:object="${teams}"
                        th:field="*{pathFile}" type="file" id="resim">
-                <div class="onizleme ml-3 mt-2 mb-2 w-20 h-20"></div>
+                <div class="onizleme inline-block ml-3 w-16 h-16"></div>
             </div>
         </div>
         <div th:replace="~{fragments/forms::inputRow(object='teams', field='tPoint', type='number')}"/>

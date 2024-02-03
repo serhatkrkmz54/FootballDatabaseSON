@@ -3,6 +3,22 @@
         layout:decorate="~{layout}">
     <head>
         <title>[[#{players.add.headline}]]</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("#resim").change(function(){
+                    var resim=document.getElementById ("resim");
+                    if (resim.files && resim.files[0]){
+                        var veri=new FileReader();
+                        veri.onload=function() {
+                            var adres=veri.result;
+                            $('.onizleme').html('<img src="'+adres+'"/>');
+                        }
+                        veri.readAsDataURL(resim.files[0]);
+                    }
+                });
+            })
+        </script>
     </head>
     <body>
         <div layout:fragment="content">
@@ -13,7 +29,16 @@
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('players')}" />
-            <form th:action="${requestUri}" method="post">
+            <form th:action="${requestUri}" method="post" enctype="multipart/form-data">
+                <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
+                    <label class="col-span-2 align-middle py-2"><span>Logo Yükle</span></label>
+                    <div class="col-span-10 flex items-center">
+                        <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                               aria-describedby="logo" name="logo" th:value="*{resimYolu}" th:object="${players}"
+                               th:field="*{resimYolu}" type="file" id="resim">
+                        <div class="onizleme inline-block ml-3 w-16 h-16"></div>
+                    </div>
+                </div>
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pName')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pSurname')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pCountry')}" />

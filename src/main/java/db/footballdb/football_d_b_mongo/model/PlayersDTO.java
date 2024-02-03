@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
@@ -58,6 +59,12 @@ public class PlayersDTO {
     @Size(max = 255)
     @JsonProperty("pFoot")
     private String pFoot;
+
+    private MultipartFile resimYolu;
+
+    @JsonProperty("filePath")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String yolResmi;
 
     private Long toTeams;
 

@@ -9,8 +9,17 @@ import db.footballdb.football_d_b_mongo.repos.CountryRepository;
 import db.footballdb.football_d_b_mongo.repos.PlayersRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.util.NotFoundException;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+import io.micrometer.common.util.StringUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +47,13 @@ public class PlayersService {
                 .map(players -> mapToDTO(players, new PlayersDTO()))
                 .toList();
     }
+    public BigDecimal getOyuncuDegeri() {
+        List<Players> oyuncuListesi = playersRepository.findAll();
+        BigDecimal oyuncuToplamDeger = oyuncuListesi.stream()
+                .map(Players::getPValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return oyuncuToplamDeger;
+    }
 
     public Page<PlayersDTO> findPage(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber-1,10);
@@ -50,7 +66,7 @@ public class PlayersService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final PlayersDTO playersDTO) {
+    public Long create(final PlayersDTO playersDTO) throws IOException{
         final Players players = new Players();
         mapToEntity(playersDTO, players);
         return playersRepository.save(players).getId();
@@ -59,7 +75,11 @@ public class PlayersService {
     public void update(final Long id, final PlayersDTO playersDTO) {
         final Players players = playersRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        mapToEntity(playersDTO, players);
+        try {
+            mapToEntity(playersDTO, players);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
         playersRepository.save(players);
     }
 
@@ -74,6 +94,7 @@ public class PlayersService {
         playersDTO.setPCountry(players.getPCountry());
         playersDTO.setPWeight(players.getPWeight());
         playersDTO.setPHeight(players.getPHeight());
+        playersDTO.setYolResmi((players.getResimYolu() == null || players.getResimYolu().isEmpty()) ? null : players.getResimYolu());
         playersDTO.setPPosition(players.getPPosition());
         playersDTO.setPPlayerAge(players.getPPlayerAge());
         playersDTO.setPValue(players.getPValue());
@@ -85,7 +106,7 @@ public class PlayersService {
         return playersDTO;
     }
 
-    private Players mapToEntity(final PlayersDTO playersDTO, final Players players) {
+    private Players mapToEntity(final PlayersDTO playersDTO, final Players players) throws IOException {
         players.setId(players.getId());
         players.setPName(playersDTO.getPName());
         players.setPSurname(playersDTO.getPSurname());
@@ -96,6 +117,29 @@ public class PlayersService {
         players.setPPlayerAge(playersDTO.getPPlayerAge());
         players.setPValue(playersDTO.getPValue());
         players.setPFoot(playersDTO.getPFoot());
+        if(playersDTO.getResimYolu() != null && !playersDTO.getResimYolu().isEmpty()){
+            byte[] imageBytes = Base64.encodeBase64(playersDTO.getResimYolu().getBytes(),false);
+            String result = new String(imageBytes);
+            players.setResimYolu(result);
+        } else {
+            if (playersDTO.getYolResmi() == null || playersDTO.getYolResmi().isEmpty()){
+                String base64Image = "src/main/resources/static/images/default-players-pic.png";
+                try {
+                    Path dosyaPath = Paths.get(base64Image);
+                    if(Files.exists(dosyaPath)){
+                        byte[] imageBytes = Base64.encodeBase64(Files.readAllBytes(dosyaPath), false);
+                        String defaultResult = new String(imageBytes);
+                        players.setResimYolu(defaultResult);
+                    } else {
+                        throw new NotFoundException("Default fotoğraf bulunamadı!");
+                    }
+                    } catch (IOException e){
+                        throw new RuntimeException(e);
+                    }
+                }else {
+                players.setResimYolu(playersDTO.getYolResmi());
+            }
+        }
         final Teams toTeams = playersDTO.getToTeams() == null ? null : teamsRepository.findById(playersDTO.getToTeams())
                 .orElseThrow(() -> new NotFoundException("toTeams not found"));
         players.setToTeams(toTeams);
