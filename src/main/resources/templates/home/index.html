@@ -197,6 +197,7 @@
                 <table class="w-full min-w-[540px]">
                     <thead>
                     <tr>
+                        <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">FOTOĞRAF</th>
                         <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">[[#{players.pName.label}]]</th>
                         <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">[[#{players.pSurname.label}]]</th>
                         <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">[[#{players.pPlayerAge.label}]]</th>
@@ -208,10 +209,14 @@
                     <div th:if="${playerses == null or playerses.empty}">[[#{players.list.empty}]]</div>
                     <div th:if="${playerses != null and not #lists.isEmpty(playerses)}">
                         <tr th:each="players: ${playerses}">
+                            <td class="py-2 px-4 border-b border-b-gray-50">
+                                <div class="flex items-center">
+                                    <img th:if="${players.filePath == null or players.filePath.isEmpty()}" src="/images/default-teams-logo.png" class="w-8 h-8">
+                                    <img th:if="${players.filePath != null and !players.filePath.isEmpty()}" th:src="@{|data:image;base64,${players.filePath}|}" class="w-8 h-8">
+                                </div>
+                            </td>
                         <td class="py-2 px-4 border-b border-b-gray-50">
-                            <div class="flex items-center">
                                <span class="text-[13px] font-medium text-gray-400">[[${players.pName}]]</span>
-                            </div>
                         </td>
                         <td class="py-2 px-4 border-b border-b-gray-50">
                             <span class="text-[13px] font-medium text-gray-400">[[${players.pSurname}]]</span>

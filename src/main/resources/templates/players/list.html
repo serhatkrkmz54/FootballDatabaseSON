@@ -244,8 +244,8 @@
                                         [[${players.id}]]
                                     </th>
                                     <td class="px-6 py-4">
-                                        <img th:if="${players.yolResmi == null or players.yolResmi.isEmpty()}" src="/images/default-players-pic.png" class="w-10 h-10">
-                                        <img th:if="${players.yolResmi != null and !players.yolResmi.isEmpty()}" th:src="@{|data:image;base64,${players.yolResmi}|}" class="w-10 h-10">
+                                        <img th:if="${players.filePath == null or players.filePath.isEmpty()}" src="/images/default-players-pic.png" class="w-10 h-10">
+                                        <img th:if="${players.filePath != null and !players.filePath.isEmpty()}" th:src="@{|data:image;base64,${players.filePath}|}" class="w-10 h-10">
                                     </td>
                                     <td class="px-6 py-4">
                                         [[${players.pName}]]

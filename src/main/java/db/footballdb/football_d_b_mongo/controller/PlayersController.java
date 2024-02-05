@@ -97,7 +97,7 @@ public class PlayersController {
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id,
             @ModelAttribute("players") @Valid final PlayersDTO playersDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) throws IOException {
+            final BindingResult bindingResult, final RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
             return "players/edit";
         }

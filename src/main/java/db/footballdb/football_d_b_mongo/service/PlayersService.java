@@ -94,7 +94,7 @@ public class PlayersService {
         playersDTO.setPCountry(players.getPCountry());
         playersDTO.setPWeight(players.getPWeight());
         playersDTO.setPHeight(players.getPHeight());
-        playersDTO.setYolResmi((players.getResimYolu() == null || players.getResimYolu().isEmpty()) ? null : players.getResimYolu());
+        playersDTO.setFilePath((players.getPathFile() == null || players.getPathFile().isEmpty()) ? null : players.getPathFile());
         playersDTO.setPPosition(players.getPPosition());
         playersDTO.setPPlayerAge(players.getPPlayerAge());
         playersDTO.setPValue(players.getPValue());
@@ -117,27 +117,18 @@ public class PlayersService {
         players.setPPlayerAge(playersDTO.getPPlayerAge());
         players.setPValue(playersDTO.getPValue());
         players.setPFoot(playersDTO.getPFoot());
-        if(playersDTO.getResimYolu() != null && !playersDTO.getResimYolu().isEmpty()){
-            byte[] imageBytes = Base64.encodeBase64(playersDTO.getResimYolu().getBytes(),false);
-            String result = new String(imageBytes);
-            players.setResimYolu(result);
+        if (playersDTO.getPathFile()  != null && !playersDTO.getPathFile().isEmpty()) {
+            byte[] image = Base64.encodeBase64(playersDTO.getPathFile().getBytes(), false);
+            String result = new String(image);
+            players.setPathFile(result);
         } else {
-            if (playersDTO.getYolResmi() == null || playersDTO.getYolResmi().isEmpty()){
+            if (playersDTO.getFilePath() == null || playersDTO.getFilePath().isEmpty()){
                 String base64Image = "src/main/resources/static/images/default-players-pic.png";
-                try {
-                    Path dosyaPath = Paths.get(base64Image);
-                    if(Files.exists(dosyaPath)){
-                        byte[] imageBytes = Base64.encodeBase64(Files.readAllBytes(dosyaPath), false);
-                        String defaultResult = new String(imageBytes);
-                        players.setResimYolu(defaultResult);
-                    } else {
-                        throw new NotFoundException("Default fotoğraf bulunamadı!");
-                    }
-                    } catch (IOException e){
-                        throw new RuntimeException(e);
-                    }
-                }else {
-                players.setResimYolu(playersDTO.getYolResmi());
+                byte[] imageBytes = Base64.encodeBase64(Files.readAllBytes(Paths.get(base64Image)), true);
+                String defaultResult = new String(imageBytes);
+                players.setPathFile(defaultResult);
+            } else {
+                players.setPathFile(playersDTO.getFilePath());
             }
         }
         final Teams toTeams = playersDTO.getToTeams() == null ? null : teamsRepository.findById(playersDTO.getToTeams())

@@ -13,19 +13,19 @@
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('players')}" />
-            <form th:action="${requestUri}" method="post">
+            <form th:action="${requestUri}" method="post" enctype="multipart/form-data">
                 <input type="submit" th:value="#{players.edit.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6 mb-5" />
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='id', disabled=true, type='number')}" />
                 <div class="md:grid grid-cols-12 col-span-2 gap-4 mb-4">
                     <label class="col-span-2 align-middle py-2"><span>Logo Yükle</span></label>
                     <div class="col-span-10">
                         <input class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                               aria-describedby="user_avatar_help" name="logo" th:value="*{yolResmi}" th:object="${players}"
-                               th:field="*{resimYolu}" type="file" >
-                        <img th:if="${players.yolResmi != null and !players.yolResmi.isEmpty()}" th:src="@{|data:image;base64,${players.yolResmi}|}" class="inline-block ml-3 w-18 h-20">
+                               aria-describedby="user_avatar_help" name="logo" th:value="*{filePath}" th:object="${players}"
+                               th:field="*{pathFile}" type="file" >
+                        <img th:if="${players.filePath != null and !players.filePath.isEmpty()}" th:src="@{|data:image;base64,${players.filePath}|}" class="inline-block ml-3 w-18 h-20">
                     </div>
                 </div>
-                <div class="hidden"><div th:replace="~{fragments/forms::inputRow(object='players', field='yolResmi', type='text')}"/></div>
+                <div class="hidden"><div th:replace="~{fragments/forms::inputRow(object='players', field='filePath', type='text')}"/></div>
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pName')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pSurname')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='players', field='pCountry')}" />

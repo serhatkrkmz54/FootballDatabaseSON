@@ -33,7 +33,7 @@ public class Players {
     @Size(max = 255)
     private String pSurname;
 
-    private String resimYolu;
+    private String pathFile;
 
     @NotNull
     @Size(max = 255)

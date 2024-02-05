@@ -60,11 +60,11 @@ public class PlayersDTO {
     @JsonProperty("pFoot")
     private String pFoot;
 
-    private MultipartFile resimYolu;
+    private MultipartFile pathFile;
 
     @JsonProperty("filePath")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String yolResmi;
+    private String filePath;
 
     private Long toTeams;
 
