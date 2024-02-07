@@ -6,6 +6,7 @@ import db.footballdb.football_d_b_mongo.domain.League;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 
 public interface TeamsRepository extends MongoRepository<Teams, Long> {
@@ -20,5 +21,7 @@ public interface TeamsRepository extends MongoRepository<Teams, Long> {
     List<Teams> findByLeaguesssId(Long leagueId);
     List<Teams> findAllByToTeamstoCompetitions(Competitions competitions);
 
+    @Query("{'tName': {$regex: ?0, $options: 'i'}}")
+    List<Teams> getByKeyword(String keyword);
 
 }

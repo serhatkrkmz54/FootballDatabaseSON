@@ -58,7 +58,10 @@ public class TeamsController {
     }
 
     @GetMapping
-    public String list(final Model model) {
+    public String list(final Model model, String keyword) {
+        List<TeamsDTO> teamses; // TeamsDTO tipinde liste tanımlanmalı
+        teamses = keyword == null ? teamsService.findAll() : teamsService.getByKeyword(keyword);
+        model.addAttribute("teamses", teamses);
         return getOnePage(model, 1);
     }
 

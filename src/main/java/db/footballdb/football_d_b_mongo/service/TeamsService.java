@@ -57,6 +57,12 @@ public class TeamsService {
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .toList();
     }
+    public List<TeamsDTO> getByKeyword(final String keyword) {
+        final List<Teams> teamses= teamsRepository.getByKeyword(keyword);
+        return teamses.stream()
+                .map(teams -> mapToDTO(teams, new TeamsDTO()))
+                .toList();
+    }
     public BigDecimal getToplamTakimDegeri() {
         List<Teams> takimListesi = teamsRepository.findAll();
         BigDecimal toplamDeger = takimListesi.stream()
@@ -68,12 +74,14 @@ public class TeamsService {
         Pageable pageable = PageRequest.of(pageNumber-1,10);
         return teamsRepository.findAll(pageable).map(teams -> mapToDTO(teams, new TeamsDTO()));
     }
+
+
+
     public TeamsDTO get(final Long id) {
         return teamsRepository.findById(id)
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .orElseThrow(NotFoundException::new);
     }
-
     public Long create(final TeamsDTO teamsDTO) throws IOException {
         final Teams teams = new Teams();
         mapToEntity(teamsDTO, teams);

@@ -161,3 +161,21 @@ document.querySelectorAll('[data-tab]').forEach(function (item) {
     })
 })
 // end: Tab
+
+document.addEventListener('DOMContentLoaded', function () {
+    var searchInput = document.getElementById('searchInput'); // Arama kutusu için bir ID eklemelisiniz
+    var tableRows = document.querySelectorAll('#teamsTable tbody tr'); // Tablo satırları için bir ID eklemelisiniz
+
+    searchInput.addEventListener('input', function () {
+        var searchTerm = searchInput.value.toLowerCase();
+
+        tableRows.forEach(function (row) {
+            var rowData = row.textContent.toLowerCase();
+            if (rowData.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
