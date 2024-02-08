@@ -58,7 +58,13 @@ public class TeamsService {
                 .toList();
     }
     public List<TeamsDTO> getByKeyword(final String keyword) {
-        final List<Teams> teamses= teamsRepository.getByKeyword(keyword);
+        final List<Teams> teamses= teamsRepository.findAll();
+        if(keyword != null) {
+            List<Teams> byKeyword = teamsRepository.getByKeyword(keyword);
+            return byKeyword.stream()
+                    .map(teams -> mapToDTO(teams, new TeamsDTO()))
+                    .toList();
+        }
         return teamses.stream()
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .toList();

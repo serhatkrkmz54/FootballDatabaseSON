@@ -27,7 +27,7 @@ public class TeamsDTO {
 
     @JsonProperty("filePath")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String filePath;
+    public String filePath;
 
     @NotNull
     @JsonProperty("tPoint")

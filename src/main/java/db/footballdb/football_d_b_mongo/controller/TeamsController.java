@@ -14,6 +14,7 @@ import db.footballdb.football_d_b_mongo.util.WebUtils;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,10 +59,10 @@ public class TeamsController {
     }
 
     @GetMapping
-    public String list(final Model model, String keyword) {
-        List<TeamsDTO> teamses; // TeamsDTO tipinde liste tanımlanmalı
-        teamses = keyword == null ? teamsService.findAll() : teamsService.getByKeyword(keyword);
+    public String list(final Model model, @Param("keyword") String keyword) {
+        List<TeamsDTO> teamses = teamsService.getByKeyword(keyword);
         model.addAttribute("teamses", teamses);
+        model.addAttribute("keyword", keyword);
         return getOnePage(model, 1);
     }
 
@@ -71,6 +72,15 @@ public class TeamsController {
         int totalPages = page.getTotalPages();
         long totalItems = page.getTotalElements();
         List<TeamsDTO> teamses = page.getContent();
+        if (model.getAttribute("keyword") != null) {
+            teamses = (List<TeamsDTO>) model.getAttribute("teamses");
+            if (teamses.size() < 10) {
+                totalPages = 1;
+            } else {
+                totalPages = (int) Math.ceil((double) teamses.size() / 10);
+            }
+            totalItems = teamses.size();
+        }
         BigDecimal toplamDeger = teamsService.getToplamTakimDegeri();
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
