@@ -6,6 +6,7 @@ import db.footballdb.football_d_b_mongo.domain.League;
 import db.footballdb.football_d_b_mongo.domain.Players;
 import db.footballdb.football_d_b_mongo.domain.Teams;
 import db.footballdb.football_d_b_mongo.model.CountryDTO;
+import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.repos.CompetitionsRepository;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
 import db.footballdb.football_d_b_mongo.repos.LeagueRepository;
@@ -13,10 +14,16 @@ import db.footballdb.football_d_b_mongo.repos.PlayersRepository;
 import db.footballdb.football_d_b_mongo.repos.TeamsRepository;
 import db.footballdb.football_d_b_mongo.util.NotFoundException;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +38,9 @@ public class CountryService {
     private final LeagueRepository leagueRepository;
 
     public CountryService(final CountryRepository countryRepository,
-            final CompetitionsRepository competitionsRepository,
-            final TeamsRepository teamsRepository, final PlayersRepository playersRepository,
-            final LeagueRepository leagueRepository) {
+                          final CompetitionsRepository competitionsRepository,
+                          final TeamsRepository teamsRepository, final PlayersRepository playersRepository,
+                          final LeagueRepository leagueRepository) {
         this.countryRepository = countryRepository;
         this.competitionsRepository = competitionsRepository;
         this.teamsRepository = teamsRepository;
@@ -47,7 +54,17 @@ public class CountryService {
                 .map(country -> mapToDTO(country, new CountryDTO()))
                 .toList();
     }
-
+    public BigDecimal getUlkeDegeri() {
+        List<Country> ulkeListesi = countryRepository.findAll();
+        BigDecimal ulkelerToplamDeger = ulkeListesi.stream()
+                .map(Country::getCValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return ulkelerToplamDeger;
+    }
+    public Page<CountryDTO> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber-1,10);
+        return countryRepository.findAll(pageable).map(country -> mapToDTO(country, new CountryDTO()));
+    }
     public CountryDTO get(final Long id) {
         return countryRepository.findById(id)
                 .map(country -> mapToDTO(country, new CountryDTO()))

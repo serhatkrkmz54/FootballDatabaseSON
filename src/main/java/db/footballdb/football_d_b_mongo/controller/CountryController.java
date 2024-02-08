@@ -2,11 +2,13 @@ package db.footballdb.football_d_b_mongo.controller;
 
 import db.footballdb.football_d_b_mongo.domain.Competitions;
 import db.footballdb.football_d_b_mongo.model.CountryDTO;
+import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.repos.CompetitionsRepository;
 import db.footballdb.football_d_b_mongo.service.CountryService;
 import db.footballdb.football_d_b_mongo.util.CustomCollectors;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/countries")
@@ -27,7 +32,7 @@ public class CountryController {
     private final CompetitionsRepository competitionsRepository;
 
     public CountryController(final CountryService countryService,
-            final CompetitionsRepository competitionsRepository) {
+                             final CompetitionsRepository competitionsRepository) {
         this.countryService = countryService;
         this.competitionsRepository = competitionsRepository;
     }
@@ -41,10 +46,22 @@ public class CountryController {
 
     @GetMapping
     public String list(final Model model) {
-        model.addAttribute("countries", countryService.findAll());
+        return getOnePage(model, 1);
+    }
+    @GetMapping("/list/page/{pageNumber}")
+    public String getOnePage(final Model model,@PathVariable("pageNumber") int currentPage) {
+        Page<CountryDTO> page = countryService.findPage(currentPage);
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+        List<CountryDTO> countries = page.getContent();
+        BigDecimal ulkelerToplamDeger = countryService.getUlkeDegeri();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("countries", countries);
+        model.addAttribute("ulkelerToplamDeger", ulkelerToplamDeger);
         return "country/list";
     }
-
     @GetMapping("/add")
     public String add(@ModelAttribute("country") final CountryDTO countryDTO) {
         return "country/add";
@@ -52,7 +69,7 @@ public class CountryController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("country") @Valid final CountryDTO countryDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+                      final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "country/add";
         }
@@ -69,8 +86,8 @@ public class CountryController {
 
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id,
-            @ModelAttribute("country") @Valid final CountryDTO countryDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+                       @ModelAttribute("country") @Valid final CountryDTO countryDTO,
+                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "country/edit";
         }
@@ -81,7 +98,7 @@ public class CountryController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") final Long id,
-            final RedirectAttributes redirectAttributes) {
+                         final RedirectAttributes redirectAttributes) {
         final String referencedWarning = countryService.getReferencedWarning(id);
         if (referencedWarning != null) {
             redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
