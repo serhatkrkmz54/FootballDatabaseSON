@@ -5,22 +5,17 @@ import db.footballdb.football_d_b_mongo.service.PlayersService;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping(value = "/api/playerss", produces = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin("*")
 public class PlayersResource {
 
     private final PlayersService playersService;
@@ -32,6 +27,11 @@ public class PlayersResource {
     @GetMapping
     public ResponseEntity<List<PlayersDTO>> getAllPlayerss() {
         return ResponseEntity.ok(playersService.findAll());
+    }
+
+    @GetMapping("/oyuncuToplamDeger")
+    public ResponseEntity<BigDecimal> getOyuncuDegeri() {
+        return ResponseEntity.ok(playersService.getOyuncuDegeri());
     }
 
     @GetMapping("/{id}")
