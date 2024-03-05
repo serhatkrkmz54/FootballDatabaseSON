@@ -60,6 +60,8 @@ public class PlayersDTO {
     @JsonProperty("pFoot")
     private String pFoot;
 
+    @JsonProperty("pathFile")
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     private MultipartFile pathFile;
 
     @JsonProperty("filePath")

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -39,8 +40,8 @@ public class PlayersResource {
         return ResponseEntity.ok(playersService.get(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Long> createPlayers(@RequestBody @Valid final PlayersDTO playersDTO) throws IOException {
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<Long> createPlayers(@ModelAttribute @Valid final PlayersDTO playersDTO) throws IOException {
         final Long createdId = playersService.create(playersDTO);
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }
