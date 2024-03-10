@@ -60,6 +60,7 @@ public class LeagueController {
         model.addAttribute("leagues", leagueService.findAll());
         return "league/list";
     }
+
     // Lig-Takım eşleştirmesi burada
 
     @GetMapping("/teams/{id}")

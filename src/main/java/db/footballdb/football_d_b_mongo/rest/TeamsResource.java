@@ -1,5 +1,6 @@
 package db.footballdb.football_d_b_mongo.rest;
 
+import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.service.TeamsService;
 import jakarta.validation.Valid;
@@ -26,6 +27,11 @@ public class TeamsResource {
     @GetMapping
     public ResponseEntity<List<TeamsDTO>> getAllTeamss() {
         return ResponseEntity.ok(teamsService.findAll());
+    }
+
+    @GetMapping("/{id}/oyuncular")
+    public ResponseEntity<List<PlayersDTO>> getOyuncular(@PathVariable(name = "id") final Long id) {
+        return ResponseEntity.ok(teamsService.listPlayersInTeams(id));
     }
 
     @GetMapping("/{id}")

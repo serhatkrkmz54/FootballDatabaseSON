@@ -1,13 +1,10 @@
 package db.footballdb.football_d_b_mongo.controller;
 
-import db.footballdb.football_d_b_mongo.domain.Competitions;
-import db.footballdb.football_d_b_mongo.domain.Country;
-import db.footballdb.football_d_b_mongo.domain.League;
-import db.footballdb.football_d_b_mongo.domain.Teams;
+import db.footballdb.football_d_b_mongo.domain.*;
+import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.model.TeamsDTO;
-import db.footballdb.football_d_b_mongo.repos.CompetitionsRepository;
-import db.footballdb.football_d_b_mongo.repos.CountryRepository;
-import db.footballdb.football_d_b_mongo.repos.LeagueRepository;
+import db.footballdb.football_d_b_mongo.repos.*;
+import db.footballdb.football_d_b_mongo.service.PlayersService;
 import db.footballdb.football_d_b_mongo.service.TeamsService;
 import db.footballdb.football_d_b_mongo.util.CustomCollectors;
 import db.footballdb.football_d_b_mongo.util.WebUtils;
@@ -35,14 +32,20 @@ public class TeamsController {
     private final CountryRepository countryRepository;
     private final LeagueRepository leagueRepository;
     private final CompetitionsRepository competitionsRepository;
+    private final TeamsRepository teamsRepository;
+    private final PlayersRepository playersRepository;
+    private final PlayersService playersService;
 
     public TeamsController(final TeamsService teamsService,
             final CountryRepository countryRepository, final LeagueRepository leagueRepository,
-            final CompetitionsRepository competitionsRepository) {
+            final CompetitionsRepository competitionsRepository,final TeamsRepository teamsRepository,final PlayersRepository playersRepository, final PlayersService playersService) {
         this.teamsService = teamsService;
         this.countryRepository = countryRepository;
         this.leagueRepository = leagueRepository;
         this.competitionsRepository = competitionsRepository;
+        this.teamsRepository = teamsRepository;
+        this.playersRepository = playersRepository;
+        this.playersService = playersService;
     }
 
     @ModelAttribute
@@ -89,7 +92,6 @@ public class TeamsController {
         model.addAttribute("toplamDeger", toplamDeger);
         return "teams/list";
     }
-
 
     @GetMapping("/add")
     public String add(@ModelAttribute("teams") final TeamsDTO teamsDTO) {

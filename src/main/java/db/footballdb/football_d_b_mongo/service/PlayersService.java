@@ -88,7 +88,7 @@ public class PlayersService {
         playersRepository.deleteById(id);
     }
 
-    private PlayersDTO mapToDTO(final Players players, final PlayersDTO playersDTO) {
+    public PlayersDTO mapToDTO(final Players players, final PlayersDTO playersDTO) {
         playersDTO.setId(players.getId());
         playersDTO.setPName(players.getPName());
         playersDTO.setPSurname(players.getPSurname());

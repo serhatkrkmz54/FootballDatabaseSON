@@ -5,6 +5,7 @@ import db.footballdb.football_d_b_mongo.domain.Country;
 import db.footballdb.football_d_b_mongo.domain.League;
 import db.footballdb.football_d_b_mongo.domain.Players;
 import db.footballdb.football_d_b_mongo.domain.Teams;
+import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.repos.CompetitionsRepository;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
@@ -40,15 +41,17 @@ public class TeamsService {
     private final LeagueRepository leagueRepository;
     private final CompetitionsRepository competitionsRepository;
     private final PlayersRepository playersRepository;
+    private final PlayersService playersService;
     public TeamsService(final TeamsRepository teamsRepository,
             final CountryRepository countryRepository, final LeagueRepository leagueRepository,
             final CompetitionsRepository competitionsRepository,
-            final PlayersRepository playersRepository) {
+            final PlayersRepository playersRepository, final PlayersService playersService) {
         this.teamsRepository = teamsRepository;
         this.countryRepository = countryRepository;
         this.leagueRepository = leagueRepository;
         this.competitionsRepository = competitionsRepository;
         this.playersRepository = playersRepository;
+        this.playersService = playersService;
     }
 
     public List<TeamsDTO> findAll() {
@@ -57,6 +60,20 @@ public class TeamsService {
                 .map(teams -> mapToDTO(teams, new TeamsDTO()))
                 .toList();
     }
+
+    public List<PlayersDTO> listPlayersInTeams(final Long id) {
+        final Teams teams = teamsRepository.findById(id).get();
+        final List<Players> players = playersRepository.findAllByToTeams(id);
+        List <PlayersDTO> list = players.stream()
+                .map(players1 -> {
+                    PlayersDTO playersDTO = playersService.mapToDTO(players1, new PlayersDTO());
+                    playersDTO.setOyuncuHangiTakimda(players1.getToTeams() == null ? null : players1.getToTeams().getTName());
+                    return playersDTO;
+                })
+                .toList();
+        return list;
+    }
+
     public List<TeamsDTO> getByKeyword(final String keyword) {
         final List<Teams> teamses= teamsRepository.findAll();
         if(keyword != null) {
