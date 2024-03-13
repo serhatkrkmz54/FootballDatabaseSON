@@ -92,6 +92,7 @@ public class PlayersService {
         playersDTO.setId(players.getId());
         playersDTO.setPName(players.getPName());
         playersDTO.setPSurname(players.getPSurname());
+        playersDTO.setFormaNo(players.getFormaNo());
         playersDTO.setPCountry(players.getPCountry());
         playersDTO.setPWeight(players.getPWeight());
         playersDTO.setPHeight(players.getPHeight());
@@ -111,6 +112,7 @@ public class PlayersService {
         players.setId(players.getId());
         players.setPName(playersDTO.getPName());
         players.setPSurname(playersDTO.getPSurname());
+        players.setFormaNo(playersDTO.getFormaNo());
         players.setPCountry(playersDTO.getPCountry());
         players.setPWeight(playersDTO.getPWeight());
         players.setPHeight(playersDTO.getPHeight());

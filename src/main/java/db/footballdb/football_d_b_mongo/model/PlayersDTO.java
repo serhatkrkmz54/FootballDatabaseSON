@@ -17,6 +17,9 @@ public class PlayersDTO {
 
     private Long id;
 
+    @JsonProperty("formaNo")
+    private Integer formaNo;
+
     @NotNull
     @Size(max = 255)
     @JsonProperty("pName")

@@ -25,6 +25,8 @@ public class Players {
     @Id
     private Long id;
 
+    private Integer formaNo;
+
     @NotNull
     @Size(max = 255)
     private String pName;
