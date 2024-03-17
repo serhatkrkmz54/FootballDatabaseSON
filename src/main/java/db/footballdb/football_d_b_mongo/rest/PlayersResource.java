@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -46,9 +45,8 @@ public class PlayersResource {
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Long> updatePlayers(@PathVariable(name = "id") final Long id,
-            @RequestBody @Valid final PlayersDTO playersDTO) {
+    @PutMapping(consumes = "multipart/form-data", value = "/{id}")
+    public ResponseEntity<Long> updatePlayers(@PathVariable(name = "id") @Valid final Long id, @ModelAttribute @Valid final PlayersDTO playersDTO) {
         playersService.update(id, playersDTO);
         return ResponseEntity.ok(id);
     }
