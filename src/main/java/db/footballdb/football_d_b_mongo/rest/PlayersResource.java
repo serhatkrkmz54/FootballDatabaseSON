@@ -39,7 +39,7 @@ public class PlayersResource {
         return ResponseEntity.ok(playersService.get(id));
     }
 
-    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping
     public ResponseEntity<Long> createPlayers(@ModelAttribute @Valid final PlayersDTO playersDTO) throws IOException {
         final Long createdId = playersService.create(playersDTO);
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);

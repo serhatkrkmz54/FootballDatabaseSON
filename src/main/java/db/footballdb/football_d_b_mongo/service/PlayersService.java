@@ -3,6 +3,7 @@ package db.footballdb.football_d_b_mongo.service;
 import db.footballdb.football_d_b_mongo.domain.Country;
 import db.footballdb.football_d_b_mongo.domain.Players;
 import db.footballdb.football_d_b_mongo.domain.Teams;
+import db.footballdb.football_d_b_mongo.domain.TransferGecmisi;
 import db.footballdb.football_d_b_mongo.model.PlayersDTO;
 import db.footballdb.football_d_b_mongo.model.TeamsDTO;
 import db.footballdb.football_d_b_mongo.repos.CountryRepository;
@@ -16,7 +17,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import io.micrometer.common.util.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -105,10 +109,12 @@ public class PlayersService {
         playersDTO.setToCountryPlayers(players.getToCountryPlayers() == null ? null : players.getToCountryPlayers().getId());
         playersDTO.setOyuncuHangiTakimda(players.getToTeams() == null ? null : players.getToTeams().getTName());
         playersDTO.setOyuncuHangiUlkede(players.getToCountryPlayers() == null ? null : players.getToCountryPlayers().getCName());
+        playersDTO.setTransferGecmisi(players.getTransferGecmisi());
         return playersDTO;
     }
 
     private Players mapToEntity(final PlayersDTO playersDTO, final Players players) throws IOException {
+        ArrayList<TransferGecmisi> transferGecmisiSet = new ArrayList<>();
         players.setId(players.getId());
         players.setPName(playersDTO.getPName());
         players.setPSurname(playersDTO.getPSurname());
@@ -134,6 +140,20 @@ public class PlayersService {
                 players.setPathFile(playersDTO.getFilePath());
             }
         }
+
+        if (players.getTransferGecmisi() != null && !players.getTransferGecmisi().isEmpty()) {
+            transferGecmisiSet.addAll(players.getTransferGecmisi());
+            for (TransferGecmisi tg : playersDTO.getTransferGecmisi()) {
+                TransferGecmisi transferGecmisi = new TransferGecmisi();
+                transferGecmisi.setToTeam(tg.getToTeam());
+                transferGecmisi.setFromTeam(tg.getFromTeam());
+                transferGecmisi.setTransferFee(tg.getTransferFee());
+                transferGecmisiSet.add(transferGecmisi);
+            }
+        }
+
+
+        players.setTransferGecmisi(transferGecmisiSet);
         final Teams toTeams = playersDTO.getToTeams() == null ? null : teamsRepository.findById(playersDTO.getToTeams())
                 .orElseThrow(() -> new NotFoundException("toTeams not found"));
         players.setToTeams(toTeams);

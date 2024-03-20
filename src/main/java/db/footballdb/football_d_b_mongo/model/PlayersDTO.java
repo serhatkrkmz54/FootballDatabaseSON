@@ -2,10 +2,16 @@ package db.footballdb.football_d_b_mongo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import db.footballdb.football_d_b_mongo.domain.TransferGecmisi;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,4 +81,5 @@ public class PlayersDTO {
 
     private String oyuncuHangiUlkede;
 
+    private ArrayList<TransferGecmisi> transferGecmisi;
 }
