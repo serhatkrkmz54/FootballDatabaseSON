@@ -15,6 +15,7 @@ public class TransferGecmisi {
     private Long fromTeam;
     private Long toTeam;
     private BigDecimal transferFee;
-    private OffsetDateTime transferDate;
+    private String transferDate;
+    private String transferType;
 
 }

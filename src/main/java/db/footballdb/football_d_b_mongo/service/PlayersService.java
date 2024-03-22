@@ -148,10 +148,11 @@ public class PlayersService {
                 transferGecmisi.setToTeam(tg.getToTeam());
                 transferGecmisi.setFromTeam(tg.getFromTeam());
                 transferGecmisi.setTransferFee(tg.getTransferFee());
+                transferGecmisi.setTransferType(tg.getTransferType());
+                transferGecmisi.setTransferDate(tg.getTransferDate());
                 transferGecmisiSet.add(transferGecmisi);
             }
         }
-
         /*
         {
             "formaNo": 70,
